@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/idParent"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/idImgList"
+            android:layout_width="150dp"
+            android:layout_height="160dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/idNameBookList"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/idImgList"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Name Book"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idAuthorList"
+            android:text="Author"
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp"
+            android:layout_below="@+id/idNameBookList"/>
+
+        <TextView
+            android:id="@+id/idPriceList"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/idAuthorList"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Price"
+            android:textColor="#17C3B2"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

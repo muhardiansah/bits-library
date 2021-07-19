@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="25dp">
+
+            <com.smarteist.autoimageslider.SliderView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:id="@+id/idImg_slider"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="2dp"
+                app:sliderIndicatorSelectedColor="#fff"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="true"/>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/idImg_slider">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/idFirstRel"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/terpopuler"
+                            android:text="Terpopuler"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/terpopuler"
+                            android:id="@+id/ramaiPinjam"
+                            android:text="Sedang ramai dipinjam"
+                            android:textSize="15sp"
+                            android:textAllCaps="false"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="250dp"
+                            android:id="@+id/lihatSemua"
+                            android:text="Lihat semua"
+                            android:textColor="#FFA01E"
+                            android:textSize="15sp"
+                            android:textAllCaps="false"
+                            />
+                        <Button
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginLeft="330dp"
+                            android:id="@+id/idRightHome"
+
+                            android:background="@drawable/ic_right_home"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/idSecondRel"
+                        android:layout_below="@+id/idFirstRel"
+                        android:layout_marginTop="20dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/idRecViewAllBookPopuler">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/idSecondRel"
+                        android:layout_marginTop="20dp"
+                        android:id="@+id/idThirdRel">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/terbaru"
+                            android:text="Terbaru"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/terbaru"
+                            android:id="@+id/baruUpload"
+                            android:text="Baru saja upload"
+                            android:textSize="15sp"
+                            android:textAllCaps="false"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="250dp"
+                            android:id="@+id/lihatSemuaBaru"
+                            android:text="Lihat semua"
+                            android:textColor="#FFA01E"
+                            android:textSize="15sp"
+                            android:textAllCaps="false"
+                            />
+                        <Button
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_marginLeft="330dp"
+                            android:id="@+id/idRightHomeBaru"
+
+                            android:background="@drawable/ic_right_home"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/idForthdRel"
+                        android:layout_below="@+id/idThirdRel"
+                        android:layout_marginTop="20dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/idRecViewAllBookTerbaru">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </RelativeLayout>
+                </RelativeLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
+
+
+</RelativeLayout>

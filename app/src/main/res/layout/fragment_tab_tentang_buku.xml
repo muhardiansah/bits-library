@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentTabTentangBuku">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailISBN"
+                android:text="ISBN"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailISBN13"
+                android:layout_below="@+id/idDetailISBN"
+                android:text="ISBN13"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailiGenre"
+                android:text="Genre"
+                android:layout_below="@+id/idDetailISBN13"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailBahasa"
+                android:text="Bahasa"
+                android:layout_below="@+id/idDetailiGenre"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailTglTerbit"
+                android:text="Tanggal Terbit"
+                android:layout_below="@+id/idDetailBahasa"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailHalaman"
+                android:text="Jumlah Halaman"
+                android:layout_below="@+id/idDetailTglTerbit"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/idISBN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="140dp"
+                android:layout_toRightOf="@+id/idDetailISBN"
+                android:text="000122323"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idISBN13"
+                android:layout_below="@+id/idDetailISBN"
+                android:text="201222222"
+                android:layout_toRightOf="@+id/idDetailISBN13"
+                android:textStyle="bold"
+                android:layout_marginLeft="120dp"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idGenre"
+                android:text="Genre"
+                android:layout_below="@+id/idDetailISBN13"
+                android:layout_toRightOf="@+id/idDetailiGenre"
+                android:textStyle="bold"
+                android:layout_marginLeft="132dp"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idBahasa"
+                android:text="Indo"
+                android:layout_toRightOf="@+id/idDetailBahasa"
+                android:textStyle="bold"
+                android:layout_marginLeft="122dp"
+                android:layout_below="@+id/idDetailiGenre"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idTglTerbit"
+                android:text="Tanggal Terbit"
+                android:layout_toRightOf="@+id/idDetailTglTerbit"
+                android:textStyle="bold"
+                android:layout_marginLeft="66dp"
+                android:layout_below="@+id/idDetailBahasa"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idHalaman"
+                android:text="Jumlah Halaman"
+                android:layout_toRightOf="@+id/idDetailHalaman"
+                android:textStyle="bold"
+                android:layout_marginLeft="44dp"
+                android:layout_below="@+id/idDetailTglTerbit"
+                android:layout_marginTop="15dp"
+                android:textSize="18sp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</FrameLayout>

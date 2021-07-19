@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp">
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/bits"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/idRelTop">
+
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/idEdtTxtEmail"
+            android:background="@drawable/custum_input"
+            android:layout_centerHorizontal="true"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:hint="Email/User Name"
+            android:inputType="text"/>
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/idEdtTxtPassword"
+            android:background="@drawable/custum_input"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_below="@+id/idEdtTxtEmail"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idLupaSandi"
+            android:layout_marginTop="15dp"
+            android:text="Lupa Kata Sandi ?"
+            android:layout_marginRight="55dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/idEdtTxtPassword"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idRelBottom"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/idRelTop">
+
+        <Button
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:id="@+id/idBtnLogin"
+            android:text="Masuk"
+            android:textColor="#fff"
+            android:backgroundTint="#17C3B2"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

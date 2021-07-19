@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    tools:context=".PinjamActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@+id/penjelasan"
+        android:text="Daftar buku yang akan dipinjam"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status :N"
+        android:id="@+id/idStatusN"
+        android:layout_toRightOf="@id/penjelasan"
+        android:visibility="gone"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idRelTop"
+        android:layout_below="@+id/penjelasan"
+        android:layout_marginTop="10dp">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/idTableLayout">
+
+
+            </TableLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/idBtnTambahBukuLain"
+        android:layout_below="@+id/idRelTop"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/ic_buku_lain"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tambah buku lainnya"
+        android:textColor="#FFA01E"
+        android:layout_below="@+id/idRelTop"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idRelMiddle"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/idBtnTambahBukuLain">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atur tanggal"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/custom_add_less">
+
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/idBtnTanggalPinjam"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_date_start" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="35dp"
+            android:background="@drawable/custom_add_less">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idEdtTanggalPinjam"
+                android:focusable="false"
+                android:textSize="14sp"
+                android:inputType="date"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp">
+            <Button
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_less"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="30dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="212dp"
+            android:background="@drawable/custom_add_less">
+
+            <Button
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:id="@+id/idBtnTanggalKembali"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_date_start" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/custom_add_less">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:id="@+id/idEdtTanggalAkhirPinjam"
+                android:textSize="14sp"
+                android:inputType="date"
+                android:layout_centerInParent="true"/>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idRelBottom"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/idRelMiddle">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail Biaya"
+            android:id="@+id/detailBiaya"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idNameBookPinjamBiaya"
+            android:text="Name Book"
+            android:layout_below="@+id/detailBiaya"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idPcsBook"
+            android:text="1 buku"
+            android:layout_below="@+id/idNameBookPinjamBiaya"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idPricePinjam"
+            android:text="Rp 10.000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="36dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/underline"
+            android:layout_below="@+id/idPcsBook"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:background="@color/gray"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idRelBottom2"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/idRelBottom">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Bayar"
+            android:id="@+id/totalBayar"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idPcsBook2"
+            android:text="Jml buku, "
+            android:layout_below="@+id/totalBayar"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idDurasiPinjam"
+            android:text="Durasi"
+            android:layout_toRightOf="@id/idPcsBook2"
+            android:layout_below="@+id/totalBayar"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:textSize="13sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idTotalPricePinjam"
+            android:text="Rp 10.000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/idRelBottom3"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/idRelBottom2">
+
+        <CheckBox
+            android:id="@+id/idCbPinjam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dengain ini saya menyetujui untuk pegembalian sesuai tanggal yang
+telah ditentukan. Apabila melewati tanggal tersebut, saya bersedia membayar denda yang telah ditentukan"
+            android:textSize="12sp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/idCbPinjam"
+            android:layout_marginTop="10dp"
+            android:id="@+id/idBtnPeminjaman"
+            android:textAllCaps="false"
+            android:text="Lanjutkan Peminjaman"/>
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

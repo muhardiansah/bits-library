@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentDipinjam">
+
+    <!-- TODO: Update blank fragment layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/idRelTop"
+            android:paddingTop="15dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/idDaftarPinjam">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idNameBookDaftarPinjaman"
+                    android:text="Name Book"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idMasaPinjam"
+                    android:textSize="15sp"
+                    android:text="Cont: 20 Sep 2020 - 23 Sep 2020"
+                    android:layout_below="@+id/idNameBookDaftarPinjaman"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/underline2"
+                    android:layout_below="@+id/idMasaPinjam"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:background="@color/gray"
+                    android:layout_marginTop="20dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/idDaftarPinjamTelat"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/idDaftarPinjam">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idNameBookDaftarPinjamanTelat"
+                    android:text="Name Book"
+                    android:textStyle="bold"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idMasaPinjamTelat"
+                    android:textSize="15sp"
+                    android:text="Cont: 20 Sep 2020 - 23 Sep 2020"
+                    android:layout_below="@+id/idNameBookDaftarPinjamanTelat"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/underline3"
+                    android:layout_below="@+id/idMasaPinjamTelat"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:background="@color/gray"
+                    android:layout_marginTop="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/notifTelat"
+                    android:text="Terlambat"
+                    android:textColor="@color/red"
+                    android:padding="4dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/custom_btn_telat"
+                    android:layout_toRightOf="@id/idMasaPinjamTelat"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+</FrameLayout>

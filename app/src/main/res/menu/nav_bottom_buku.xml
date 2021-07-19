@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Stok"
+        android:id="@+id/stok"/>
+    <item
+        android:title="Status"
+        android:id="@+id/statusStok"/>
+    <item
+        android:title="Pinjam Buku"
+        android:id="@+id/pinjamBuku"/>
+</menu>

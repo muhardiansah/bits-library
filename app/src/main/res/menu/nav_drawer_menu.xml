@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Beranda"
+        android:id="@+id/beranda"
+        android:icon="@drawable/ic_beranda"/>
+    <item
+        android:title="Daftar Pinjaman"
+        android:id="@+id/pinjaman"
+        android:icon="@drawable/ic_pinjaman"/>
+    <item
+        android:title="Pengaturan Akun"
+        android:id="@+id/pengaturan"
+        android:icon="@drawable/ic_settings"/>
+</menu>

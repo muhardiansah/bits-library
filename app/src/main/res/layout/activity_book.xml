@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BookActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/idFirstRelLayout">
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="220dp"
+                android:id="@+id/idBookImg"
+                android:src="@mipmap/ic_launcher"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="50dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idBookName"
+                android:layout_below="@+id/idBookImg"
+                android:layout_centerHorizontal="true"
+                android:text="Name Book"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/idBookName"
+                android:layout_marginTop="10dp"
+                android:id="@+id/idBookAuth"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Price"
+                android:textSize="18sp"
+                android:textColor="#17C3B2"
+                android:id="@+id/idPriceBook"
+                android:layout_below="@+id/idBookAuth"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/idSecondRel"
+            android:layout_below="@+id/idFirstRelLayout"
+            android:padding="20dp">
+
+            <com.google.android.material.tabs.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/idTabLayout"
+                app:tabMode="fixed"
+                app:tabIndicatorGravity="bottom"
+                app:tabSelectedTextColor="@color/blue"
+                app:tabIndicatorAnimationMode="elastic">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sinopsis"
+                    android:outlineSpotShadowColor="@color/black"/>
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tentang Buku" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+
+            <androidx.viewpager.widget.ViewPager
+
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:id="@+id/idViewPager"
+                android:layout_below="@+id/idTabLayout">
+            </androidx.viewpager.widget.ViewPager>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/cardview_shadow_end_color"
+            android:background="@color/cardview_shadow_end_color"
+            android:layout_alignParentBottom="true"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/idDetailStok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stok"
+                android:textSize="16sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="20"
+                android:textStyle="bold"
+                android:id="@+id/idStokBuku"
+                android:layout_below="@+id/idDetailStok"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idStatusStok"
+                android:background="#17C3B2"
+                android:padding="3dp"
+                android:textColor="#297d75"
+                android:textSize="13sp"
+                android:layout_toRightOf="@+id/idStokBuku"
+                android:layout_below="@+id/idDetailStok"
+                android:layout_marginLeft="20dp"
+                android:text="Status"
+                />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="Pinjam Buku"
+                android:textColor="#fff"
+                android:background="@drawable/custom_button"
+                android:id="@+id/idBtnPinjamBuku"
+                android:layout_alignParentEnd="true"
+                />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

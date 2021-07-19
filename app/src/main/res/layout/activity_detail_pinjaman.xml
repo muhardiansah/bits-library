@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".DetailPinjamanActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/topRel">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Con : 20 Okt 2020"
+            android:textColor="#17C3B2"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:id="@+id/idTglPinjamDetail"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailTglPinjam"
+            android:layout_below="@+id/idTglPinjamDetail"
+            android:layout_marginTop="8dp"
+            android:text="Tanggal Pinjam"
+            android:textSize="15sp"
+            />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_right"
+            android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Con : 20 Okt 2020"
+            android:textColor="#17C3B2"
+            android:layout_alignParentEnd="true"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:id="@+id/idTglKembaliDetail"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailTglKembali"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/idTglPinjamDetail"
+            android:layout_marginTop="8dp"
+            android:text="Tanggal Kembali"
+            android:textSize="15sp"
+            />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/underline"
+        android:layout_below="@+id/topRel"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:background="@color/gray"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/middleRel"
+        android:layout_below="@+id/underline"
+        android:layout_marginTop="15dp">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="180dp"
+            android:id="@+id/idImgPinjamDetail"
+            android:src="@mipmap/ic_launcher"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idNameBookPinjamDetail"
+            android:text="Book Name"
+            android:layout_toRightOf="@+id/idImgPinjamDetail"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idAuthorPinjamDetail"
+            android:text="Author"
+            android:layout_toRightOf="@+id/idImgPinjamDetail"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idBiayaPinjamDetail"
+            android:textStyle="bold"
+            android:text="Con : Rp 10.000"
+
+            android:layout_toRightOf="@+id/idImgPinjamDetail"
+            android:layout_marginTop="155dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jml Pcs"
+            android:layout_toRightOf="@+id/idBiayaPinjamDetail"
+            android:id="@+id/idPcsBookDetail"
+            android:layout_marginTop="155dp"
+            android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/underline2"
+        android:layout_below="@+id/middleRel"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:background="@color/gray"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/middleRel2"
+        android:layout_below="@+id/underline2"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/harusDibayar"
+            android:text="Biaya yg harus dibayar"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idTotalBayar"
+            android:text="Cont: Rp 30.000"
+            android:textStyle="bold"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

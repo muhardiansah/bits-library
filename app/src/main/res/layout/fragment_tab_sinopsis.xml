@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentTabSinopsis">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/idTxtSinopsis"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id euismod est. Suspendisse potenti. In nec nulla nisl. Aliquam consequat metus nunc, ac vulputate nulla tincidunt vitae. Aliquam efficitur aliquet enim. Nulla blandit, ipsum id ultricies pharetra, nisi velit accumsan lorem, quis gravida lacus magna semper dolor. Quisque vitae felis vitae elit congue volutpat. Aliquam erat volutpat.
+
+Nulla facilisi. Proin finibus placerat nibh sit amet dictum. Quisque justo diam, varius et lacus ut, imperdiet auctor enim. In eu aliquet arcu, eget sollicitudin purus. Praesent nisl arcu, suscipit accumsan massa a, molestie pharetra ante. Nam nec felis nisl. Quisque congue dolor in ligula consequat facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis malesuada faucibus tellus, vestibulum convallis magna fringilla eu. Integer consectetur neque ullamcorper eros suscipit commodo."
+            android:padding="20dp"
+            android:textSize="18sp"/>
+
+    </ScrollView>
+
+
+</FrameLayout>
