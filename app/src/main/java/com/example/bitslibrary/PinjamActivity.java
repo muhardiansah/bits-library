@@ -62,9 +62,11 @@ public class PinjamActivity extends AppCompatActivity {
 
         initViews();
 
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.layout_container, new CartPinjamFragment());
-//        transaction.commit();
+        addCart();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container_cart, new CartPinjamFragment());
+        transaction.commit();
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -141,12 +143,12 @@ public class PinjamActivity extends AppCompatActivity {
             }
         });
 
-        addCart();
+
         fillData();
 
     }
 
-    private void addCart(){
+    public void addCart(){
         try {
             Intent intent = getIntent();
             Book book = (Book) intent.getSerializableExtra("bookId");

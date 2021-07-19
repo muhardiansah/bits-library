@@ -21,27 +21,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiBook extends AppCompatActivity {
     public static final String BASE_URL = "https://bits-library.herokuapp.com/api/";
 
-//    private static SharedPreferences sp = getApplicationContext().getSharedPreferences("myApi", Context.MODE_PRIVATE);
-//    public static final String apiKey = sp.getString("Authorization","");
+    private static Context context;
+    public static SharedPreferences preferences;
+    private static final String shared_pref_name = "myPref";
+    private static final String key_api = "api";
 
-//    public SharedPreferences getSp(){
-//        SharedPreferences sp = getApplicationContext().getSharedPreferences("myApi", Context.MODE_PRIVATE);
+//    public ApiBook(Context context) {
+//        this.context = context;
 //    }
 //
-//    public getResponse(){
-//
+//    public static String getPreferences() {
+//        preferences = context.getSharedPreferences(shared_pref_name, MODE_PRIVATE);
+//        String api_key = preferences.getString(key_api, null);
+//        return api_key;
 //    }
 
     public static Retrofit getRetrofit(){
-//        SharedPreferences sp = getApplicationContext().getSharedPreferences("myApi", Context.MODE_PRIVATE);
-//        String apiKey = sp.getString("Authorization","");
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @NotNull
                     @Override
                     public Response intercept(@NotNull Chain chain) throws IOException {
+                        preferences = context.getSharedPreferences(shared_pref_name, context.MODE_PRIVATE);
+                        String api_key = preferences.getString(key_api, null);
                         Request.Builder builder = chain.request().newBuilder();
-                        builder.addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoiYXJkaUBnbWFpbC5jb20iLCJleHAiOjE2MjY2ODU3OTIsImp0aSI6Iks3OEE1MExLMzFXOFdJOUw0MEw0SzVLSzMiLCJpc3MiOiJCSVRTTElCUkFSWSJ9.vee0b0kcwN4Y8KbVLC3m1gP3BuNFWqLJwFL-u_tC9oY");
+                        builder.addHeader("Authorization", "Bearer "+api_key);
+//                        eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoiYXJkaUBnbWFpbC5jb20iLCJleHAiOjE2MjY2ODU3OTIsImp0aSI6Iks3OEE1MExLMzFXOFdJOUw0MEw0SzVLSzMiLCJpc3MiOiJCSVRTTElCUkFSWSJ9.vee0b0kcwN4Y8KbVLC3m1gP3BuNFWqLJwFL-u_tC9oY
                         return chain.proceed(builder.build());
                     }
                 }).build();

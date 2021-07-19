@@ -20,6 +20,7 @@ import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.CartPinjam;
 import com.example.bitslibrary.Models.ItemPinjam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRecviewAdapter.ViewHolder> {
@@ -37,7 +38,7 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
         this.fragment = fragment;
     }
 
-    private List<ItemPinjam> itemPinjamList;
+    private List<ItemPinjam> itemPinjamList = new ArrayList<>();
 
     public CartPinjamRecviewAdapter() {
     }
@@ -53,10 +54,10 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        for (ItemPinjam itemPinjam: CartPinjam.contents()){
-            holder.txtName.setText(itemPinjam.getBook().getName());
-            holder.txtAuthor.setText(itemPinjam.getBook().getAuthor());
-            holder.txtJmlBuku.setText(itemPinjam.getQty());
+//        for (ItemPinjam itemPinjam: CartPinjam.contents()){
+            holder.txtName.setText(itemPinjamList.get(position).getBook().getName());
+            holder.txtAuthor.setText(itemPinjamList.get(position).getBook().getAuthor());
+            holder.txtJmlBuku.setText(itemPinjamList.get(position).getQty());
 
             deleteCartItem = (DeleteCartItem) fragment;
 
@@ -69,7 +70,7 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            deleteCartItem.onDelete(itemPinjam.getBook());
+                            deleteCartItem.onDelete(itemPinjamList.get(position).getBook());
                         }
                     });
                     builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -81,7 +82,7 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
                     builder.create().show();
                 }
             });
-        }
+//        }
     }
 
     @Override
@@ -108,7 +109,7 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
     }
 
     public void setItems(List<ItemPinjam> itemPinjamList){
-        this.itemPinjamList =itemPinjamList;
+        this.itemPinjamList = itemPinjamList;
         notifyDataSetChanged();
     }
 }

@@ -41,6 +41,8 @@ public class BookActivity extends AppCompatActivity {
     private Context context;
     private int id;
 
+    private PinjamActivity pinjamActivity;
+
     public BookActivity() {
     }
 

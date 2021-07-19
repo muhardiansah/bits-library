@@ -1,10 +1,13 @@
 package com.example.bitslibrary;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +33,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static android.content.Context.MODE_PRIVATE;
+
 //import retrofit2.Call;
 //import retrofit2.Callback;
 //import retrofit2.Response;
@@ -39,7 +44,7 @@ import retrofit2.Retrofit;
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
 
-    private Retrofit retrofit;
+    private TextView textViewApi;
     private SliderView sliderView;
     private RecyclerView recViewPopuler, recViewTerbaru;
     private BookAdapter bookPopulerAdapter, bookTerbaruAdapter;
@@ -49,6 +54,10 @@ public class MainFragment extends Fragment {
             R.drawable.book3,
             R.drawable.book4
     };
+
+    public static SharedPreferences preferences;
+    private static final String shared_pref_name = "myPref";
+    private static final String key_api = "api";
 
     @Nullable
     @Override
@@ -64,6 +73,11 @@ public class MainFragment extends Fragment {
         sliderView.setSliderTransformAnimation(SliderAnimations.DEPTHTRANSFORMATION);
         sliderView.startAutoCycle();
 
+//        preferences = getContext().getSharedPreferences(shared_pref_name, MODE_PRIVATE);
+//        String api_key = preferences.getString(key_api, null);
+//
+//        textViewApi.setText("token : "+api_key);
+
         Call<BookResponse> call  = ApiBook.getUserService().getBook();
         call.enqueue(new Callback<BookResponse>() {
             @Override
@@ -76,6 +90,8 @@ public class MainFragment extends Fragment {
                 BookResponse bookResponse = response.body();
 //                Toast.makeText(getActivity(), "response berhasil", Toast.LENGTH_SHORT).show();
                 bookList = new ArrayList<>(Arrays.asList(bookResponse.getData()));
+
+
 
                 bookPopulerAdapter = new BookAdapter(getActivity(), bookList);
                 bookTerbaruAdapter = new BookAdapter(getActivity(), bookList);
@@ -92,28 +108,6 @@ public class MainFragment extends Fragment {
                 Toast.makeText(getActivity(),t.getLocalizedMessage(),Toast.LENGTH_LONG).show();
             }
         });
-
-//        retrofit = new Retrofit.Builder()
-//                .baseUrl(base_url)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        UserService userService = retrofit.create(UserService.class);
-//        Call<List<Post>> call = userService.getPost();
-//        call.enqueue(new Callback<List<Post>>() {
-//            @Override
-//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-//                List<Post> postList = response.body();
-//                BookAdapter bookAdapter = new BookAdapter(getActivity(), postList);
-//                recViewPopuler.setAdapter(bookAdapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Post>> call, Throwable t) {
-//                System.out.println("failed");
-//            }
-//        });
-
         return view;
     }
 
@@ -122,6 +116,7 @@ public class MainFragment extends Fragment {
         sliderView = (SliderView) view.findViewById(R.id.idImg_slider);
         recViewPopuler = (RecyclerView) view.findViewById(R.id.idRecViewAllBookPopuler);
         recViewTerbaru = (RecyclerView) view.findViewById(R.id.idRecViewAllBookTerbaru);
+        textViewApi = (TextView) view.findViewById(R.id.apikey);
     }
 
 }

@@ -27,10 +27,16 @@
                 app:sliderScrollTimeInSec="2"
                 app:sliderStartAutoCycle="true"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/apikey"/>
+
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/idImg_slider">
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"

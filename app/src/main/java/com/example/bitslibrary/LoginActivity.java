@@ -28,7 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtTxtEmail, edtTxtPassword;
     private Button btnLogin;
     SharedPreferences preferences;
-    String apiKey;
+    private static final String shared_pref_name = "myPref";
+    private static final String key_api = "api";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         loginRequest.setEmail(edtTxtEmail.getText().toString());
         loginRequest.setPassword(edtTxtPassword.getText().toString());
 
+        preferences = getSharedPreferences(shared_pref_name,MODE_PRIVATE);
+
         Call<LoginResponse> loginResponseCall = ApiClient.getUserService().userLogin(loginRequest);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -67,10 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse.getStatus() == true){
                         Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 
-                        apiKey = loginResponse.getApikey_account();
+                        String apiKey = loginResponse.getApikey_account();
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("Authorization", apiKey);
-                        editor.commit();
+                        editor.putString(key_api, apiKey);
+                        editor.apply();
 
                         new Handler().postDelayed(new Runnable() {
                             @Override

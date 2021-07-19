@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.CartPinjam;
+import com.example.bitslibrary.Models.ItemPinjam;
+
+import java.util.List;
 
 public class CartPinjamFragment extends Fragment implements CartPinjamRecviewAdapter.DeleteCartItem {
     private static final String TAG = "CartPinjamFragment";
@@ -25,8 +28,8 @@ public class CartPinjamFragment extends Fragment implements CartPinjamRecviewAda
     }
 
     private RecyclerView recViewCart;
-
     private CartPinjamRecviewAdapter adapter;
+    private List<ItemPinjam> itemPinjamList;
 
     @Nullable
     @Override
@@ -45,6 +48,8 @@ public class CartPinjamFragment extends Fragment implements CartPinjamRecviewAda
         adapter = new CartPinjamRecviewAdapter(this);
         recViewCart.setAdapter(adapter);
         recViewCart.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        adapter.setItems(itemPinjamList);
     }
 
     private void initViews(View view){
