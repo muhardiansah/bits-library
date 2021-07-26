@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.bitslibrary.Models.Book;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>  {
@@ -45,10 +46,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>  {
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
 
+        DecimalFormat dformt = new DecimalFormat();
         Book book = bookList.get(position);
         holder.txtName.setText(book.getName());
         holder.txtAuthor.setText(book.getAuthor());
-        holder.txtPrice.setText(String.valueOf(book.getPrice()));
+        holder.txtPrice.setText("Rp "+dformt.format(book.getPrice()));
 
         Glide.with(context).load("https://upload.wikimedia.org/wikipedia/id/2/28/Koala_Kumal.jpg")
                 .into(holder.imageView);

@@ -1,4 +1,8 @@
-package com.example.bitslibrary.Models;
+package com.example.bitslibrary.Api;
+
+import com.example.bitslibrary.Models.BookResponse;
+import com.example.bitslibrary.Models.LoginRequest;
+import com.example.bitslibrary.Models.LoginResponse;
 
 import java.util.List;
 

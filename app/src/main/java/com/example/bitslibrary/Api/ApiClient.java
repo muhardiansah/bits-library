@@ -1,16 +1,6 @@
-package com.example.bitslibrary.Models;
+package com.example.bitslibrary.Api;
 
-import android.app.Application;
-
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

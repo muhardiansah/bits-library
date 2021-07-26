@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bitslibrary.Models.Book;
-import com.example.bitslibrary.Models.CartPinjam;
 import com.example.bitslibrary.Models.ItemPinjam;
 
 import java.util.List;

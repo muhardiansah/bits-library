@@ -1,4 +1,7 @@
-package com.example.bitslibrary.Models;
+package com.example.bitslibrary;
+
+import com.example.bitslibrary.Models.Book;
+import com.example.bitslibrary.Models.ItemPinjam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +34,14 @@ public class CartPinjam {
             s += itemPinjam.getBook().getPrice() * itemPinjam.getQty();
         }
         return s;
+    }
+
+    public static int totalBuku(){
+        int b = 0;
+        for (ItemPinjam itemPinjam: itemPinjams){
+            b += itemPinjam.getQty();
+        }
+        return b;
     }
 
     public static boolean isExist(Book book){

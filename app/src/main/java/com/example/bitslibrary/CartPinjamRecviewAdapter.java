@@ -1,9 +1,7 @@
 package com.example.bitslibrary;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.bitslibrary.Models.Book;
-import com.example.bitslibrary.Models.CartPinjam;
 import com.example.bitslibrary.Models.ItemPinjam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRecviewAdapter.ViewHolder> {
@@ -38,7 +33,7 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
         this.fragment = fragment;
     }
 
-    private List<ItemPinjam> itemPinjamList = new ArrayList<>();
+    private List<ItemPinjam> itemPinjamList;
 
     public CartPinjamRecviewAdapter() {
     }
@@ -46,7 +41,7 @@ public class CartPinjamRecviewAdapter extends RecyclerView.Adapter<CartPinjamRec
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recview_cart_pinjam_selected, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rel_cart_pinjam_selected, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }

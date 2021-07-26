@@ -6,28 +6,38 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.bitslibrary.Models.ApiBook;
-import com.example.bitslibrary.Models.ApiClient;
+//import com.example.bitslibrary.Models.ApiBook;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
+import com.example.bitslibrary.Api.UserService;
 import com.google.android.material.tabs.TabLayout;
 
-import java.io.Serializable;
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BookActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -41,7 +51,13 @@ public class BookActivity extends AppCompatActivity {
     private Context context;
     private int id;
 
+    SharedPreferences preferences;
+    private static final String shared_pref_name = "myPref";
+    private static final String key_api = "api";
+
     private PinjamActivity pinjamActivity;
+
+    private ProgressBar spinner;
 
     public BookActivity() {
     }
@@ -56,17 +72,35 @@ public class BookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         try {
             id = intent.getIntExtra("bookId",0);
+            spinner.setVisibility(View.VISIBLE);
             setViewsValues();
         }catch (NullPointerException e){
             e.printStackTrace();
         }
 
-//        final int position = 0;
-
     }
 
     private void setViewsValues(){
-        Call<BookResponse> call = ApiBook.getUserService().getBook();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new Interceptor() {
+                    @NotNull
+                    @Override
+                    public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
+                        Request.Builder builder = chain.request().newBuilder();
+                        builder.addHeader("Authorization", "Bearer "+getToken());
+                        return chain.proceed(builder.build());
+                    }
+
+                }).build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(new MainFragment().BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+        UserService userService = retrofit.create(UserService.class);
+        Call<BookResponse> call = userService.getBook();
         call.enqueue(new Callback<BookResponse>() {
             @Override
             public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
@@ -75,14 +109,18 @@ public class BookActivity extends AppCompatActivity {
                     return;
                 }
                 BookResponse bookResponse = response.body();
+
+                spinner.setVisibility(View.GONE);
+
                 Toast.makeText(BookActivity.this, "detail response berhasil", Toast.LENGTH_SHORT).show();
                 List<Book> bookList = new ArrayList<>(Arrays.asList(bookResponse.getData()));
                 for (Book b: bookList){
                     if (b.getId() == id){
+                        DecimalFormat dformt = new DecimalFormat();
                         incomingBook = b;
                         txtName.setText(b.getName());
                         txtAuthor.setText(b.getAuthor());
-                        txtPrice.setText(String.valueOf(b.getPrice()));
+                        txtPrice.setText("Rp "+dformt.format(b.getPrice()));
                         Glide.with(BookActivity.this).load("https://upload.wikimedia.org/wikipedia/id/2/28/Koala_Kumal.jpg")
                                 .into(imageView);
                     }
@@ -114,6 +152,12 @@ public class BookActivity extends AppCompatActivity {
         viewPager.setAdapter(viewAdapterTabLayout);
     }
 
+    private String getToken(){
+        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
+        String api_key = preferences.getString(key_api, null);
+        return api_key;
+    }
+
     private void initViews(){
         tabLayout = findViewById(R.id.idTabLayout);
         viewPager = findViewById(R.id.idViewPager);
@@ -121,11 +165,10 @@ public class BookActivity extends AppCompatActivity {
         txtName = findViewById(R.id.idBookName);
         txtAuthor = findViewById(R.id.idBookAuth);
         txtPrice = findViewById(R.id.idPriceBook);
-
-
         stokBuku = findViewById(R.id.idStokBuku);
         statuStok = findViewById(R.id.idStatusStok);
-
         btnPinjam = findViewById(R.id.idBtnPinjamBuku);
+
+        spinner = findViewById(R.id.idProgbar);
     }
 }

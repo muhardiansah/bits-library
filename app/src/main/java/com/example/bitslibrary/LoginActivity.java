@@ -13,23 +13,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.bitslibrary.Models.ApiClient;
+import com.example.bitslibrary.Api.ApiClient;
 import com.example.bitslibrary.Models.LoginRequest;
 import com.example.bitslibrary.Models.LoginResponse;
-import com.example.bitslibrary.Models.UserService;
+import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText edtTxtEmail, edtTxtPassword;
+    private TextInputEditText edtTxtEmail, edtTxtPassword;
     private Button btnLogin;
+
     SharedPreferences preferences;
     private static final String shared_pref_name = "myPref";
     private static final String key_api = "api";
+    private static final int key_usrId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse.getStatus() == true){
                         Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
 
+                        int userId = (int) loginResponse.getUsr_id();
                         String apiKey = loginResponse.getApikey_account();
                         SharedPreferences.Editor editor = preferences.edit();
+                        editor.putInt(String.valueOf(key_usrId), userId);
                         editor.putString(key_api, apiKey);
                         editor.apply();
 
@@ -80,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void run() {
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             }
-                        },700);
+                        },500);
                     }else {
                         Toast.makeText(LoginActivity.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -97,9 +99,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    private static String token;
 
     private void initWidgets(){
         edtTxtEmail = findViewById(R.id.idEdtTxtEmail);

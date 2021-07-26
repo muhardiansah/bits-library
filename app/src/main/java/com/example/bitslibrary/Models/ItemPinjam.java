@@ -29,4 +29,12 @@ public class ItemPinjam implements Serializable {
     public void setQty(int qty) {
         this.qty = qty;
     }
+
+    @Override
+    public String toString() {
+        return "ItemPinjam{" +
+                "book=" + book +
+                ", qty=" + qty +
+                '}';
+    }
 }
