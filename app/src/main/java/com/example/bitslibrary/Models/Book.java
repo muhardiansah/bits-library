@@ -17,12 +17,12 @@ public class Book implements Serializable {
     private String date_pub;
     private int pages;
     private String sinopsis;
-    private double price;
+    private int price;
     private int fineamt;
 
     public Book(int id, String name, String imgUrl, String author, String isbn, String isbn_13,
                 String genre, String language, String date_pub, int pages, String sinopsis,
-                double price, int fineamt) {
+                int price, int fineamt) {
         this.id = id;
         this.name = name;
         this.imgUrl = imgUrl;
@@ -126,11 +126,11 @@ public class Book implements Serializable {
         this.sinopsis = sinopsis;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

@@ -21,7 +21,18 @@
             android:layout_centerHorizontal="true"
             app:titleTextColor="#fff"
             android:background="#17C3B2"
-            android:elevation="4dp"/>
+            android:elevation="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idTxtToolBook"
+                android:textColor="#fff"
+                android:text="Bits Library"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+
+        </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
             android:layout_width="match_parent"

@@ -1,6 +1,5 @@
 package com.example.bitslibrary;
 
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.bitslibrary.Models.Book;
+import com.example.bitslibrary.Adapter.BookAdapter;
+import com.example.bitslibrary.Adapter.SliderAdapter;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;

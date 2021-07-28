@@ -11,17 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitsLibrary">
-        <activity android:name=".PengaturanAkunActivity"></activity>
-        <activity android:name=".PinjamActivity" />
+        <activity android:name=".PengaturanAkunActivity"
+            android:label=""/>
+        <activity android:name=".PinjamActivity"
+            android:label=""/>
         <activity android:name=".DetailPinjamanActivity" />
         <activity android:name=".KonfirmasiActivity" />
-        <activity android:name=".BookActivity" />
+        <activity android:name=".BookActivity"
+            android:label=""/>
         <activity android:name=".AllBookActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:label="" />
 
         <activity android:name=".DaftarPinjamanActivity"
-            android:label="Daftar Pinjam"
-            android:parentActivityName=".MainActivity">
+            android:label=""
+            >
         </activity>
 
         <activity android:name=".LoginActivity">

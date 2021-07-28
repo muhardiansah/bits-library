@@ -1,8 +1,11 @@
 package com.example.bitslibrary.Api;
 
 import com.example.bitslibrary.Models.BookResponse;
+import com.example.bitslibrary.Models.Borrow;
 import com.example.bitslibrary.Models.LoginRequest;
 import com.example.bitslibrary.Models.LoginResponse;
+import com.example.bitslibrary.Models.PinjamRequest;
+import com.example.bitslibrary.Models.PinjamResponse;
 
 import java.util.List;
 
@@ -20,6 +23,9 @@ public interface UserService {
     @GET("book/index")
     Call<BookResponse> getBook();
 
-//    @POST("borrow/create")
+    @POST("borrow/create")
+    Call<PinjamResponse> pinjam(@Body PinjamRequest pinjamRequest);
 
+//    @POST("borrow/create")
+//    Call<Borrow> pinjam(@Body Borrow borrow);
 }

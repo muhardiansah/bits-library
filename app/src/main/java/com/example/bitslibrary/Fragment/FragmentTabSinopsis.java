@@ -1,4 +1,4 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Fragment;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,9 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //import com.example.bitslibrary.Models.ApiBook;
+import com.example.bitslibrary.MainFragment;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.R;
 
 import org.jetbrains.annotations.NotNull;
 

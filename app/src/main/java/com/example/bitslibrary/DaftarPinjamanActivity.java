@@ -11,14 +11,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.material.appbar.AppBarLayout;
+import com.example.bitslibrary.Fragment.FragmentDikembalikan;
+import com.example.bitslibrary.Fragment.FragmentDipinjam;
 import com.google.android.material.tabs.TabLayout;
 
 public class DaftarPinjamanActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Toolbar toolbar;
-    private ActionBar actionBar;
 
 
     @Override
@@ -28,12 +28,11 @@ public class DaftarPinjamanActivity extends AppCompatActivity {
 
         initViews();
 
+        toolbar.setNavigationIcon(R.drawable.ic_back);
         setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        getSupportActionBar().setCustomView(R.layout.action_bar_layout);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#17C3B2"));
 
@@ -45,10 +44,22 @@ public class DaftarPinjamanActivity extends AppCompatActivity {
         viewPager.setAdapter(viewAdapterTabLayout);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initViews(){
         tabLayout = findViewById(R.id.idTabLayoutDaftarPinjaman);
         viewPager = findViewById(R.id.idViewPagerDaftarPinjaman);
-        toolbar = findViewById(R.id.idToolbarPinjam);
+        toolbar = findViewById(R.id.toolbarPinjamList);
 
     }
 

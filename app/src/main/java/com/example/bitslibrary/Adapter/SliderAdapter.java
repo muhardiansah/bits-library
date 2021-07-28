@@ -1,10 +1,11 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.bitslibrary.R;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 public class SliderAdapter extends SliderViewAdapter<SliderAdapter.Holder> {

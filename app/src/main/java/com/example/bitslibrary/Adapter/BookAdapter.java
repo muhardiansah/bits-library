@@ -1,4 +1,4 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.bitslibrary.BookActivity;
 import com.example.bitslibrary.Models.Book;
+import com.example.bitslibrary.R;
 
 import java.text.DecimalFormat;
 import java.util.List;

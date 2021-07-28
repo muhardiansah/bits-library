@@ -4,12 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="25dp"
     tools:context=".PinjamActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarPinjam"
+        app:titleTextColor="#fff"
+        android:background="#17C3B2"
+        android:elevation="4dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idTxtToolBook"
+            android:textColor="#fff"
+            android:text="Pinjam Buku"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="25dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -35,6 +53,7 @@
                 android:text="user id"
                 android:id="@+id/idUserPinjam"
                 android:layout_toRightOf="@id/penjelasan"
+                android:visibility="gone"
                 />
 
             <RelativeLayout

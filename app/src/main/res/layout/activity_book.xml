@@ -9,6 +9,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbarBook"
+            app:titleTextColor="#fff"
+            android:background="#17C3B2"
+            android:elevation="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idTxtToolBook"
+                android:textColor="#fff"
+                android:text="Judul"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"/>
+        </androidx.appcompat.widget.Toolbar>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +38,7 @@
                 android:id="@+id/idBookImg"
                 android:src="@mipmap/ic_launcher"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="70dp"/>
 
             <TextView
                 android:layout_width="wrap_content"

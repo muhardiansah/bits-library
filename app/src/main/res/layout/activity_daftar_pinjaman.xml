@@ -6,25 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".DaftarPinjamanActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:id="@+id/idAppBar"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarPinjamList"
+        app:titleTextColor="#fff"
+        android:background="#17C3B2"
+        android:elevation="4dp">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/idToolbarPinjam"
-            app:titleTextColor="@color/white"
-            android:background="#17C3B2">
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+            android:id="@+id/idTxtToolBook"
+            android:textColor="#fff"
+            android:text="Daftar Pinjaman"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/topRelDaftar"
-        android:layout_below="@+id/idAppBar">
+        android:layout_below="@+id/toolbarPinjamList">
 
 
         <com.google.android.material.tabs.TabLayout

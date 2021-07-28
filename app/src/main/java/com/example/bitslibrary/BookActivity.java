@@ -1,6 +1,9 @@
 package com.example.bitslibrary;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -8,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +21,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 //import com.example.bitslibrary.Models.ApiBook;
+import com.example.bitslibrary.Fragment.FragmentTabSinopsis;
+import com.example.bitslibrary.Fragment.FragmentTabTentangBuku;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
@@ -44,7 +50,9 @@ public class BookActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ImageView imageView;
     private TextView txtName, txtAuthor, txtPrice;
-    private TextView stokBuku, statuStok;
+    private TextView stokBuku, statuStok, txtToolbook;
+
+    private Toolbar toolbar;
 
     private Button btnPinjam;
     private Book incomingBook;
@@ -54,8 +62,6 @@ public class BookActivity extends AppCompatActivity {
     SharedPreferences preferences;
     private static final String shared_pref_name = "myPref";
     private static final String key_api = "api";
-
-    private PinjamActivity pinjamActivity;
 
     private ProgressBar spinner;
 
@@ -68,6 +74,12 @@ public class BookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book);
 
         initViews();
+
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         Intent intent = getIntent();
         try {
@@ -118,6 +130,7 @@ public class BookActivity extends AppCompatActivity {
                     if (b.getId() == id){
                         DecimalFormat dformt = new DecimalFormat();
                         incomingBook = b;
+                        txtToolbook.setText(b.getName());
                         txtName.setText(b.getName());
                         txtAuthor.setText(b.getAuthor());
                         txtPrice.setText("Rp "+dformt.format(b.getPrice()));
@@ -158,6 +171,18 @@ public class BookActivity extends AppCompatActivity {
         return api_key;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void initViews(){
         tabLayout = findViewById(R.id.idTabLayout);
         viewPager = findViewById(R.id.idViewPager);
@@ -170,5 +195,7 @@ public class BookActivity extends AppCompatActivity {
         btnPinjam = findViewById(R.id.idBtnPinjamBuku);
 
         spinner = findViewById(R.id.idProgbar);
+        toolbar = findViewById(R.id.toolbarBook);
+        txtToolbook = findViewById(R.id.idTxtToolBook);
     }
 }

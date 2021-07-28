@@ -4,202 +4,227 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context=".PengaturanAkunActivity">
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/idFirstRel">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/idProfl"
-            android:src="@mipmap/ic_launcher"/>
-
+        android:id="@+id/toolbarPengaturan"
+        app:titleTextColor="#fff"
+        android:background="#17C3B2"
+        android:elevation="4dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubah Foto Profil"
-            android:layout_marginTop="10dp"
-            android:id="@+id/idTxtUbahFoto"
-            android:layout_below="@+id/idProfl"
-            android:layout_centerHorizontal="true"
-            android:textColor="#FF9F1C"/>
-    </RelativeLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/idFirstRel"
-        android:text="Informasi Pribadi"
-        android:id="@+id/infoPribadi"
-        android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"/>
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/secondRel"
-        android:layout_below="@+id/infoPribadi">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idNamaAkun"
-            android:text="Nama"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idNoHpAkun"
-            android:layout_below="@+id/idNamaAkun"
-            android:text="No Hp"
-            android:layout_marginTop="15dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idEmailAkun"
-            android:layout_below="@+id/idNoHpAkun"
-            android:text="Email"
-            android:layout_marginTop="15dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idAlamatAkun"
-            android:layout_below="@+id/idEmailAkun"
-            android:text="Alamat"
-            android:layout_marginTop="15dp"
-            android:textSize="17sp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/thirdRel"
-        android:layout_marginLeft="50dp"
-        android:layout_below="@+id/infoPribadi"
-        android:layout_toRightOf="@+id/secondRel">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idDetailNamaAkun"
-            android:text="Nama User"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:id="@+id/underline"
-            android:layout_below="@+id/idDetailNamaAkun"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:background="@color/gray"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idDetailNoHpAkun"
-            android:layout_below="@+id/underline"
-            android:text="No Hp User"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:id="@+id/underline2"
-            android:layout_below="@+id/idDetailNoHpAkun"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:background="@color/gray"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idDetailEmailAkun"
-            android:layout_below="@+id/underline2"
-            android:text="Email User"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:id="@+id/underline3"
-            android:layout_below="@+id/idDetailEmailAkun"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:background="@color/gray"
-            android:layout_marginTop="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idDetailAlamatAkun"
-            android:layout_below="@+id/underline3"
-            android:text="Alamat User"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:textSize="17sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:id="@+id/underline4"
-            android:layout_below="@+id/idDetailAlamatAkun"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:background="@color/gray"
-            android:layout_marginTop="5dp"/>
-
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ubahSandi"
-        android:text="Ubah Kata Sandi"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_below="@+id/secondRel"
-        android:layout_marginTop="25dp"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/forthRel"
-        android:layout_below="@+id/ubahSandi">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/idPasswordBaru"
-            android:lines="2"
-            android:hint="Kata sandi baru"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/idPasswordBaru"
-            android:layout_marginTop="15dp"
-            android:lines="2"
-            android:id="@+id/idUlangiPasswordBaru"
-            android:hint="Kata sandi baru"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/idBtnSimpanPerubahanAkun"
-            android:text="Simpan Perubahan"
-            android:background="@drawable/custom_button"
-            android:layout_below="@+id/idUlangiPasswordBaru"
-            android:layout_marginTop="80dp"
+            android:id="@+id/idTxtToolBook"
             android:textColor="#fff"
-            android:textAllCaps="false"/>
+            android:text="Pengaturan"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_below="@+id/toolbarPengaturan">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/idFirstRel">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/idProfl"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubah Foto Profil"
+                android:layout_marginTop="10dp"
+                android:id="@+id/idTxtUbahFoto"
+                android:layout_below="@+id/idProfl"
+                android:layout_centerHorizontal="true"
+                android:textColor="#FF9F1C"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/idFirstRel"
+            android:text="Informasi Pribadi"
+            android:id="@+id/infoPribadi"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/secondRel"
+            android:layout_below="@+id/infoPribadi">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idNamaAkun"
+                android:text="Nama"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idNoHpAkun"
+                android:layout_below="@+id/idNamaAkun"
+                android:text="No Hp"
+                android:layout_marginTop="15dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idEmailAkun"
+                android:layout_below="@+id/idNoHpAkun"
+                android:text="Email"
+                android:layout_marginTop="15dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idAlamatAkun"
+                android:layout_below="@+id/idEmailAkun"
+                android:text="Alamat"
+                android:layout_marginTop="15dp"
+                android:textSize="17sp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/thirdRel"
+            android:layout_marginLeft="50dp"
+            android:layout_below="@+id/infoPribadi"
+            android:layout_toRightOf="@+id/secondRel">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailNamaAkun"
+                android:text="Nama User"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/underline"
+                android:layout_below="@+id/idDetailNamaAkun"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@color/gray"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailNoHpAkun"
+                android:layout_below="@+id/underline"
+                android:text="No Hp User"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/underline2"
+                android:layout_below="@+id/idDetailNoHpAkun"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@color/gray"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailEmailAkun"
+                android:layout_below="@+id/underline2"
+                android:text="Email User"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/underline3"
+                android:layout_below="@+id/idDetailEmailAkun"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@color/gray"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/idDetailAlamatAkun"
+                android:layout_below="@+id/underline3"
+                android:text="Alamat User"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:textSize="17sp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/underline4"
+                android:layout_below="@+id/idDetailAlamatAkun"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@color/gray"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ubahSandi"
+            android:text="Ubah Kata Sandi"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_below="@+id/secondRel"
+            android:layout_marginTop="25dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/forthRel"
+            android:layout_below="@+id/ubahSandi">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/idPasswordBaru"
+                android:lines="2"
+                android:hint="Kata sandi baru"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/idPasswordBaru"
+                android:layout_marginTop="15dp"
+                android:lines="2"
+                android:id="@+id/idUlangiPasswordBaru"
+                android:hint="Kata sandi baru"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/idBtnSimpanPerubahanAkun"
+                android:text="Simpan Perubahan"
+                android:background="@drawable/custom_button"
+                android:layout_below="@+id/idUlangiPasswordBaru"
+                android:layout_marginTop="80dp"
+                android:textColor="#fff"
+                android:textAllCaps="false"/>
+        </RelativeLayout>
+
     </RelativeLayout>
+
 
 </RelativeLayout>

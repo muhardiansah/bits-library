@@ -1,6 +1,7 @@
 package com.example.bitslibrary;
 
 import com.example.bitslibrary.Models.Book;
+import com.example.bitslibrary.Models.BorrowData;
 import com.example.bitslibrary.Models.ItemPinjam;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class CartPinjam {
     private static List<ItemPinjam> itemPinjams = new ArrayList<>();
+    private static List<BorrowData> borrowDatas = new ArrayList<>();
 
     public static void insert(ItemPinjam itemPinjam){
         itemPinjams.add(itemPinjam);
@@ -24,12 +26,16 @@ public class CartPinjam {
         itemPinjams.remove(index);
     }
 
+    public static List<BorrowData> contentBorrow(){
+        return borrowDatas;
+    }
+
     public static List<ItemPinjam> contents(){
         return itemPinjams;
     }
 
-    public static double total(){
-        double s = 0;
+    public static long total(){
+        long s = 0;
         for (ItemPinjam itemPinjam: itemPinjams){
             s += itemPinjam.getBook().getPrice() * itemPinjam.getQty();
         }
