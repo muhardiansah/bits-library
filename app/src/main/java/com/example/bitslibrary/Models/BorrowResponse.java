@@ -6,13 +6,13 @@ import java.time.OffsetDateTime;
 // Borrow.java
 class BorrowResponse {
     private long id;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private String start_date;
+    private String end_date;
     private long usr_id;
     private String status;
     private long total;
-    private OffsetDateTime createdAt;
-    private OffsetDateTime updatedAt;
+    private String createdAt;
+    private String updatedAt;
 
     public long getId() {
         return id;
@@ -20,22 +20,6 @@ class BorrowResponse {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public LocalDate getStart_date() {
-        return start_date;
-    }
-
-    public void setStart_date(LocalDate start_date) {
-        this.start_date = start_date;
-    }
-
-    public LocalDate getEnd_date() {
-        return end_date;
-    }
-
-    public void setEnd_date(LocalDate end_date) {
-        this.end_date = end_date;
     }
 
     public long getUsr_id() {
@@ -62,19 +46,35 @@ class BorrowResponse {
         this.total = total;
     }
 
-    public OffsetDateTime getCreatedAt() {
+    public String getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
+    }
+
+    public String getEnd_date() {
+        return end_date;
+    }
+
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
+    }
+
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(OffsetDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public OffsetDateTime getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(OffsetDateTime updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
