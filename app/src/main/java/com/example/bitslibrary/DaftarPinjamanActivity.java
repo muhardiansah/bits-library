@@ -1,7 +1,6 @@
 package com.example.bitslibrary;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -11,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.bitslibrary.Adapter.ViewAdapterTabLayout;
 import com.example.bitslibrary.Fragment.FragmentDikembalikan;
 import com.example.bitslibrary.Fragment.FragmentDipinjam;
 import com.google.android.material.tabs.TabLayout;

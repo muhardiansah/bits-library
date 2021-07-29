@@ -1,4 +1,4 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,19 +8,17 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class ViewAdapterTabLayout extends FragmentPagerAdapter {
-
+public class ViewAdapterTabDaftarPinjam extends FragmentPagerAdapter {
     private final ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     private final ArrayList<String> fragmentTitle = new ArrayList<>();
 
-    public ViewAdapterTabLayout(@NonNull FragmentManager fm, int behavior) {
+    public ViewAdapterTabDaftarPinjam(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-
         return fragmentArrayList.get(position);
     }
 
@@ -34,9 +32,10 @@ public class ViewAdapterTabLayout extends FragmentPagerAdapter {
         fragmentTitle.add(title);
     }
 
+
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return fragmentTitle.get(position);
+        return super.getPageTitle(position);
     }
 }

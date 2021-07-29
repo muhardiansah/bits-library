@@ -1,5 +1,7 @@
 package com.example.bitslibrary.Models;
 
+import com.example.bitslibrary.Models.Book;
+
 import java.io.Serializable;
 
 public class BookResponse {

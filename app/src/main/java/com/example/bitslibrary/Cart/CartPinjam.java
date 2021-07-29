@@ -1,4 +1,4 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Cart;
 
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BorrowData;
@@ -34,8 +34,8 @@ public class CartPinjam {
         return itemPinjams;
     }
 
-    public static long total(){
-        long s = 0;
+    public static int total(){
+        int s = 0;
         for (ItemPinjam itemPinjam: itemPinjams){
             s += itemPinjam.getBook().getPrice() * itemPinjam.getQty();
         }

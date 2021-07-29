@@ -12,8 +12,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,14 +31,14 @@ import android.widget.Toast;
 
 //import com.example.bitslibrary.Models.ApiBook;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Cart.CartPinjam;
+import com.example.bitslibrary.Fragment.MainFragment;
 import com.example.bitslibrary.Models.Book;
-import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Models.Borrow;
 import com.example.bitslibrary.Models.BorrowData;
 import com.example.bitslibrary.Models.ItemPinjam;
 import com.example.bitslibrary.Models.PinjamRequest;
 import com.example.bitslibrary.Models.PinjamResponse;
-import com.example.bitslibrary.Models.User;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,7 +46,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -62,7 +61,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PinjamActivity extends AppCompatActivity {
     private TextView txtId, txtName, txtAuthor, txtJml, txtPrice, txtQty, txtDetailName, txtSubtotal,
-            txtTotal, statusN, txtTotalBuku, txtDurasi, userId, tess, subtotal;
+            txtTotal, statusN, txtTotalBuku, txtDurasi, userId, tess, subtotal, totalVal;
     private ImageView imgView;
     private EditText edtTgPinjam, edtTglAkhirPinjam;
     private DatePickerDialog datePickerDialogStart, datePickerDialogEnd;
@@ -75,23 +74,28 @@ public class PinjamActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-//    private ArrayList<Borrow> borrows = new ArrayList<>();
-//    private ArrayList<BorrowData>[] borrowsD = new ArrayList[]
-//    final int position;
-
     int count = 1;
     private Button btnAdd, btnLess, btnTambahBuku, btnDelete, btnPeminjaman;
 
     private DecimalFormat dformt = new DecimalFormat();
 
-    SharedPreferences preferences;
+    SharedPreferences preferences, preferencesBorrow, preferencesBorrowData;
     private static final String shared_pref_name = "myPref";
     private static final int key_usrId = 0;
     private static final String key_api = "api";
 
-//    public PinjamActivity(int position) {
-//        this.position = position;
-//    }
+    private static final String shared_pref_name_borrow = "borrowPref";
+    private static final String tglStartPref = "tglStart";
+    private static final String tglEndPref = "tglEnd";
+    private static final int usrIdPref = 0;
+    private static final String statusPref = "status";
+    private static final int totalPref = 0;
+
+    private static final String shared_pref_name_borrowData = "borrowDataPref";
+    private static final int idBook_pref = 0;
+    private static final int price_pref = 0;
+    private static final int qty_pref = 0;
+    private static final int subtotal_pref = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,67 +178,59 @@ public class PinjamActivity extends AppCompatActivity {
                         TextUtils.isEmpty(edtTglAkhirPinjam.getText().toString())){
                     Toast.makeText(PinjamActivity.this, "Isi dengan lengkap", Toast.LENGTH_LONG).show();
                 }else {
-//                    Toast.makeText(PinjamActivity.this, "Berhasil pinjam", Toast.LENGTH_LONG).show();
-                    postPinjam();
+//                    tes();
+                    konfirmasiPinjam();
+//                    postPinjam();
                 }
             }
         });
 
+    }
 
+    private void tes(){
+        int idbook = Integer.parseInt(txtId.getText().toString());
+        int price = Integer.parseInt(txtPrice.getText().toString());
+        int qty = Integer.parseInt(txtQty.getText().toString());
+        int subtotal2 = Integer.parseInt(subtotal.getText().toString());
+        String tgl = edtTgPinjam.getText().toString();
+        Toast.makeText(this, "id nya : "+idbook+" "+price+" "+qty+" "+subtotal2, Toast.LENGTH_SHORT).show();
+    }
+
+    public void konfirmasiPinjam(){
+
+        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
+        String edtTglStartPref = edtTgPinjam.getText().toString();
+        String edtTglEndPref = edtTglAkhirPinjam.getText().toString();
+        int usrIdPrefInt = usrId;
+        String statusNPref = statusN.getText().toString();
+        int totalPrefInt = Integer.parseInt(totalVal.getText().toString());
+
+        int idbook = Integer.parseInt(txtId.getText().toString());
+        int price = Integer.parseInt(txtPrice.getText().toString());
+        int qty = Integer.parseInt(txtQty.getText().toString());
+        int subtotal2 = Integer.parseInt(subtotal.getText().toString());
+
+        SharedPreferences.Editor editor = preferencesBorrow.edit();
+        editor.putString(tglStartPref, edtTglStartPref);
+        editor.putString(tglEndPref, edtTglEndPref);
+        editor.putInt(String.valueOf(usrIdPref), usrIdPrefInt);
+        editor.putString(statusPref, statusNPref);
+        editor.putInt(String.valueOf(totalPref),totalPrefInt);
+        editor.putInt(String.valueOf(idBook_pref), idbook);
+        editor.putInt(String.valueOf(price_pref), price);
+        editor.putInt(String.valueOf(qty_pref), qty);
+        editor.putInt(String.valueOf(subtotal_pref), subtotal2);
+        editor.apply();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(PinjamActivity.this, KonfirmasiActivity.class));
+            }
+        },500);
     }
 
     public void postPinjam(){
-
-//        for (BorrowData borrowData: CartPinjam.contentBorrow()){
-//
-//            Borrow borrow = new Borrow();
-//            borrow.setStart_date(edtTgPinjam.getText().toString());
-//            borrow.setEnd_date(edtTglAkhirPinjam.getText().toString());
-//            borrow.setUsr_id(usrId);
-//            borrow.setStatus(statusN.getText().toString());
-//            borrow.setTotal(CartPinjam.total());
-//
-//
-//
-//            ItemPinjam itemPinjam = null;
-//            double d = itemPinjam.getBook().getPrice();
-//            long l = (new Double(d)).longValue();
-//            double val = itemPinjam.getBook().getPrice() * itemPinjam.getQty();
-//            long sub = (new Double(val)).longValue();
-//            borrowData.setBook_id(itemPinjam.getBook().getId());
-//            borrowData.setPrice(l);
-//            borrowData.setQty(itemPinjam.getQty());
-//            borrowData.setSubtotal(sub);
-//
-//            PinjamRequest pinjamRequest = new PinjamRequest();
-//
-//
-//
-//            pinjamRequest.setBorrow(borrow);
-//            pinjamRequest.setBorrowd(borrowData);
-//        }
-
-//        borrow.setStart_date(edtTgPinjam.getText().toString());
-//        borrow.setEnd_date(edtTglAkhirPinjam.getText().toString());
-//        borrow.setUsr_id(usrId);
-//        borrow.setStatus(statusN.getText().toString());
-//        borrow.setTotal(CartPinjam.total());
-//
-//        PinjamRequest pinjamRequest = new PinjamRequest();
-//        pinjamRequest.setBorrow(borrow);
-
-//        for (BorrowData borrowData : CartPinjam.contentBorrow()){
-//            ItemPinjam itemPinjam = null;
-//            double d = itemPinjam.getBook().getPrice();
-//            long l = (new Double(d)).longValue();
-//            double val = itemPinjam.getBook().getPrice() * itemPinjam.getQty();
-//            long sub = (new Double(val)).longValue();
-//            borrowData.setBook_id(itemPinjam.getBook().getId());
-//            borrowData.setPrice(l);
-//            borrowData.setQty(itemPinjam.getQty());
-//            borrowData.setSubtotal(sub);
-//            pinjamRequest.getBorrowd().add(borrowData);
-//        }
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -267,11 +263,10 @@ public class PinjamActivity extends AppCompatActivity {
         );
 
 
-
         PinjamRequest pinjamRequest = new PinjamRequest();
         List<BorrowData> bData = new ArrayList<BorrowData>();
 
-        for (BorrowData borrowData : CartPinjam.contentBorrow()){
+        for (BorrowData borrowData : new PinjamRequest().borrowDataList()){
 
 
 
@@ -303,26 +298,6 @@ public class PinjamActivity extends AppCompatActivity {
         pinjamRequest.setBorrow(borrow);
         pinjamRequest.setBorrowd(bData);
 
-//        UserService userService = retrofit.create(UserService.class);
-//        Call<Borrow> call = userService.pinjam(borrow);
-//        call.enqueue(new Callback<Borrow>() {
-//            @Override
-//            public void onResponse(Call<Borrow> call, Response<Borrow> response) {
-//                if (response.isSuccessful()){
-//                    Toast.makeText(PinjamActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                }else {
-//                    Toast.makeText(PinjamActivity.this, "Nothing response", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Borrow> call, Throwable t) {
-//                String message = t.getLocalizedMessage();
-//                Toast.makeText(PinjamActivity.this, message, Toast.LENGTH_LONG).show();
-//            }
-//        });
-
         UserService userService = retrofit.create(UserService.class);
         Call<PinjamResponse> call  = userService.pinjam(pinjamRequest);
         call.enqueue(new Callback<PinjamResponse>() {
@@ -332,6 +307,7 @@ public class PinjamActivity extends AppCompatActivity {
                     PinjamResponse pinjamResponse = response.body();
                     if (pinjamResponse.getStatus() == true){
                         Toast.makeText(PinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
                     }else {
                         Toast.makeText(PinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -465,6 +441,7 @@ public class PinjamActivity extends AppCompatActivity {
         }
         txtTotalBuku.setText(String.valueOf(CartPinjam.totalBuku())+" Buku");
         txtDurasi.setText("");
+        totalVal.setText(String.valueOf(CartPinjam.total()));
         txtTotal.setText("Rp "+dformt.format(CartPinjam.total()));
 
     }
@@ -499,7 +476,7 @@ public class PinjamActivity extends AppCompatActivity {
         datePickerDialogEnd.show();
     }
 
-    private String getToken(){
+    public String getToken(){
         preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
         String api_key = preferences.getString(key_api, null);
         return api_key;
@@ -518,7 +495,7 @@ public class PinjamActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-
+        totalVal = findViewById(R.id.idTotalVal);
         txtTotal = findViewById(R.id.idTotalPricePinjam);
         txtTotalBuku = findViewById(R.id.idTotalPcsBook);
         txtDurasi = findViewById(R.id.idDurasiPinjam);

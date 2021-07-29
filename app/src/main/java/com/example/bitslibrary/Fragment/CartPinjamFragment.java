@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.bitslibrary.CartPinjam;
-import com.example.bitslibrary.CartPinjamRecviewAdapter;
+import com.example.bitslibrary.Cart.CartPinjam;
+import com.example.bitslibrary.Adapter.CartPinjamRecviewAdapter;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.ItemPinjam;
 import com.example.bitslibrary.R;

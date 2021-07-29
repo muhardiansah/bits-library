@@ -72,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         int userId = (int) loginResponse.getUsr_id();
                         String apiKey = loginResponse.getApikey_account();
+
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putInt(String.valueOf(key_usrId), userId);
                         editor.putString(key_api, apiKey);
@@ -105,6 +106,6 @@ public class LoginActivity extends AppCompatActivity {
         edtTxtPassword = findViewById(R.id.idEdtTxtPassword);
         btnLogin = findViewById(R.id.idBtnLogin);
 
-        preferences = getSharedPreferences("myApi", Context.MODE_PRIVATE);
+//        preferences = getSharedPreferences("myApi", Context.MODE_PRIVATE);
     }
 }

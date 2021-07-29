@@ -1,4 +1,4 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Adapter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.ItemPinjam;
+import com.example.bitslibrary.R;
 
 import java.util.List;
 

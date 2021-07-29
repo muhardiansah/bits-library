@@ -1,7 +1,6 @@
 package com.example.bitslibrary;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -21,8 +20,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 //import com.example.bitslibrary.Models.ApiBook;
+import com.example.bitslibrary.Adapter.ViewAdapterTabLayout;
 import com.example.bitslibrary.Fragment.FragmentTabSinopsis;
 import com.example.bitslibrary.Fragment.FragmentTabTentangBuku;
+import com.example.bitslibrary.Fragment.MainFragment;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
@@ -165,7 +166,7 @@ public class BookActivity extends AppCompatActivity {
         viewPager.setAdapter(viewAdapterTabLayout);
     }
 
-    private String getToken(){
+    public String getToken(){
         preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
         String api_key = preferences.getString(key_api, null);
         return api_key;

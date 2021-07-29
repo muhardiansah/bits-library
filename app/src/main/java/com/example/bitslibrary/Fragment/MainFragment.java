@@ -1,4 +1,4 @@
-package com.example.bitslibrary;
+package com.example.bitslibrary.Fragment;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import com.example.bitslibrary.Adapter.SliderAdapter;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.R;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -149,7 +150,7 @@ public class MainFragment extends Fragment {
         return view;
     }
 
-    private String getToken(){
+    public String getToken(){
         preferences = getContext().getSharedPreferences(shared_pref_name, MODE_PRIVATE);
         String api_key = preferences.getString(key_api, null);
         return api_key;

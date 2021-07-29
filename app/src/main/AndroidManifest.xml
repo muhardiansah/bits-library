@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bitslibrary">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,23 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitsLibrary">
-        <activity android:name=".PengaturanAkunActivity"
-            android:label=""/>
-        <activity android:name=".PinjamActivity"
-            android:label=""/>
+        <activity android:name=".SuksesPinjamActivity"></activity>
+        <activity
+            android:name=".PengaturanAkunActivity"
+            android:label="" />
+        <activity
+            android:name=".PinjamActivity"
+            android:label="" />
         <activity android:name=".DetailPinjamanActivity" />
         <activity android:name=".KonfirmasiActivity" />
-        <activity android:name=".BookActivity"
-            android:label=""/>
-        <activity android:name=".AllBookActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".BookActivity"
             android:label="" />
-
-        <activity android:name=".DaftarPinjamanActivity"
-            android:label=""
-            >
-        </activity>
-
+        <activity android:name=".AllBookActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="" />
+        <activity
+            android:name=".DaftarPinjamanActivity"
+            android:label=""></activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
