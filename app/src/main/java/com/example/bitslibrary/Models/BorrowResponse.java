@@ -4,21 +4,21 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 // Borrow.java
-class BorrowResponse {
-    private long id;
+public class BorrowResponse {
+    private int id;
     private String start_date;
     private String end_date;
-    private long usr_id;
+    private int usr_id;
     private String status;
-    private long total;
+    private int total;
     private String createdAt;
     private String updatedAt;
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -42,7 +42,7 @@ class BorrowResponse {
         return usr_id;
     }
 
-    public void setUsr_id(long usr_id) {
+    public void setUsr_id(int usr_id) {
         this.usr_id = usr_id;
     }
 
@@ -54,11 +54,11 @@ class BorrowResponse {
         this.status = status;
     }
 
-    public long getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(long total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

@@ -2,7 +2,6 @@ package com.example.bitslibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,12 +9,12 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.bitslibrary.Api.ApiClient;
 import com.example.bitslibrary.Models.LoginRequest;
 import com.example.bitslibrary.Models.LoginResponse;
+import com.example.bitslibrary.Models.Utils;
 import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
@@ -26,10 +25,10 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText edtTxtEmail, edtTxtPassword;
     private Button btnLogin;
 
-    SharedPreferences preferences;
-    private static final String shared_pref_name = "myPref";
-    private static final String key_api = "api";
-    private static final int key_usrId = 0;
+//    SharedPreferences preferences;
+//    private static final String shared_pref_name = "myPref";
+//    private static final String key_api = "api";
+//    private static final int key_usrId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         loginRequest.setEmail(edtTxtEmail.getText().toString());
         loginRequest.setPassword(edtTxtPassword.getText().toString());
 
-        preferences = getSharedPreferences(shared_pref_name,MODE_PRIVATE);
-
         Call<LoginResponse> loginResponseCall = ApiClient.getUserService().userLogin(loginRequest);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
@@ -73,10 +70,14 @@ public class LoginActivity extends AppCompatActivity {
                         int userId = (int) loginResponse.getUsr_id();
                         String apiKey = loginResponse.getApikey_account();
 
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putInt(String.valueOf(key_usrId), userId);
-                        editor.putString(key_api, apiKey);
-                        editor.apply();
+                        Utils.setToken(apiKey);
+                        Utils.setUsrId(userId);
+
+//                        preferences = getSharedPreferences(shared_pref_name,MODE_PRIVATE);
+//                        SharedPreferences.Editor editor = preferences.edit();
+//                        editor.putInt(String.valueOf(key_usrId), userId);
+//                        editor.putString(key_api, apiKey);
+//                        editor.apply();
 
                         new Handler().postDelayed(new Runnable() {
                             @Override

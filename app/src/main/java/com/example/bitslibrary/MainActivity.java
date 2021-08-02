@@ -15,12 +15,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.bitslibrary.Api.UserService;
 import com.example.bitslibrary.Fragment.MainFragment;
 import com.example.bitslibrary.Models.LoginResponse;
+import com.example.bitslibrary.Models.UserResponse;
+import com.example.bitslibrary.Models.Utils;
 import com.google.android.material.navigation.NavigationView;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "MainActivity";
@@ -28,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private Toolbar toolbar;
 
-    private TextView user, email;
+    private TextView txtUser, txtEmail;
     private View hView;
 
     LoginResponse loginResponse;
@@ -53,8 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         hView = navigationView.getHeaderView(0);
 
-//        user = (TextView) hView.findViewById(R.id.idUser);
-//
+        txtUser = (TextView) hView.findViewById(R.id.idUser);
+        txtEmail = (TextView) hView.findViewById(R.id.idEmail);
+
+        viewUser();
+
+
         Intent intent = getIntent();
         if (intent.getExtras() != null){
             loginResponse = (LoginResponse) intent.getSerializableExtra("data");
@@ -101,6 +123,70 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         return false;
+    }
+
+    private void viewUser(){
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(new Interceptor() {
+                    @NotNull
+                    @Override
+                    public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
+                        Request.Builder builder = chain.request().newBuilder();
+                        builder.addHeader("Authorization", "Bearer "+ Utils.getToken());
+                        return chain.proceed(builder.build());
+                    }
+
+                }).build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(new MainFragment().BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
+                .build();
+
+        int usrId = Utils.getUsrId();
+
+        UserService userService = retrofit.create(UserService.class);
+        Call<UserResponse> call = userService.getUser(usrId);
+        call.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+                if (response.isSuccessful()){
+                    UserResponse userResponse = response.body();
+
+                    if (userResponse.getStatus() == true){
+                        Toast.makeText(MainActivity.this, userResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        String user = userResponse.getData().getName();
+                        String email = userResponse.getData().getEmail();
+                        String nohp = userResponse.getData().getMobile();
+                        String alamat = userResponse.getData().getAddress();
+                        String password = userResponse.getData().getPassword();
+
+                        txtUser.setText(user);
+                        txtEmail.setText(email);
+
+                        Utils.setNamaUser(user);
+                        Utils.setEmailUser(email);
+                        Utils.setNohpUser(nohp);
+                        Utils.setAlamatUser(alamat);
+                        Utils.setPassKonfirm(password);
+
+                    }else {
+                        Toast.makeText(MainActivity.this, userResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(MainActivity.this, "nothing response", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this,t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void initViews(){

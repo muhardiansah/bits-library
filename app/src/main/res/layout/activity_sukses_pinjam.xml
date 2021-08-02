@@ -8,6 +8,13 @@
     android:padding="30dp"
     tools:context=".SuksesPinjamActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/borrowId"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,9 +24,9 @@
             android:layout_marginTop="100dp"
             android:layout_centerHorizontal="true"
             android:layout_height="150dp"
-            android:background="@drawable/checlist"/>
+            android:background="@drawable/checlist2"/>
         <TextView
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/yeay"

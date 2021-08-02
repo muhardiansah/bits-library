@@ -22,6 +22,7 @@ import com.example.bitslibrary.Adapter.SliderAdapter;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Models.Utils;
 import com.example.bitslibrary.R;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -103,7 +104,7 @@ public class MainFragment extends Fragment {
                     @Override
                     public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
                         Request.Builder builder = chain.request().newBuilder();
-                        builder.addHeader("Authorization", "Bearer "+getToken());
+                        builder.addHeader("Authorization", "Bearer "+ Utils.getToken());
                         return chain.proceed(builder.build());
                     }
 

@@ -1,21 +1,28 @@
 package com.example.bitslibrary;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Fragment.KonfirmasiFragment;
 import com.example.bitslibrary.Fragment.MainFragment;
 import com.example.bitslibrary.Models.Borrow;
 import com.example.bitslibrary.Models.BorrowData;
 import com.example.bitslibrary.Models.PinjamRequest;
 import com.example.bitslibrary.Models.PinjamResponse;
+import com.example.bitslibrary.Models.Utils;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,80 +41,66 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class KonfirmasiActivity extends AppCompatActivity {
-    private TextView txtUser, txtStart;
-    private TextInputEditText ePassword;
+public class KonfirmasiPinjamActivity extends AppCompatActivity {
+
     private Button btnProses;
+    private Toolbar toolbar;
 
     private int usrId, idbook;
     private String tglStart;
-
-    SharedPreferences preferences, preferencesBorrow;
-    private static final String shared_pref_name = "myPref";
-    private static final int key_usrId = 0;
-    private static final String key_api = "api";
-
-    private static final String shared_pref_name_borrow = "borrowPref";
-    private static final String tglStartPref = "tglStart";
-    private static final String tglEndPref = "tglEnd";
-    private static final int usrIdPref = 0;
-    private static final String statusPref = "status";
-    private static final int totalPref = 0;
-
-    private static final String shared_pref_name_borrowData = "borrowDataPref";
-    private static final int idBook_pref = 0;
-    private static final int price_pref = 0;
-    private static final int qty_pref = 0;
-    private static final int subtotal_pref = 0;
-
+    private TextView txtUser;
+    private TextInputEditText ePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_konfirmasi);
+        setContentView(R.layout.activity_konfirmasi_pinjam);
 
         iniViews();
 
-        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
-        usrId = preferences.getInt(String.valueOf(key_usrId),0);
+        toolbar.setNavigationIcon(R.drawable.ic_back2);
+        setSupportActionBar(toolbar);
 
-//        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
-//        tglStart = preferencesBorrow.getString(tglStartPref, null);
-        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
-        idbook = preferencesBorrow.getInt(String.valueOf(idBook_pref), 0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        txtUser.setText("Hai "+usrId);
-        txtStart.setText("id "+String.valueOf(idbook));
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.layout_container_konfirmasi, new KonfirmasiFragment());
+//        transaction.commit();
+
+        String user =  Utils.getNamaUser();
+        txtUser.setText("Hai "+user);
+
+        String getPassKonfirm = Utils.getPassKonfirm();
 
         btnProses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(ePassword.getText().toString())){
-                    Toast.makeText(KonfirmasiActivity.this, "Password Required", Toast.LENGTH_SHORT).show();
-                }else {
-
-                    prosesPinjam();
+                    ePassword.setError("password required");
+                    ePassword.requestFocus();
+                    return;
                 }
+                prosesPinjam();
             }
         });
 
     }
-    
-    private void cekUser(){
-    }
-    
+
+
     private void prosesPinjam(){
 
-        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
-        tglStart = preferencesBorrow.getString(tglStartPref, null);
-        String tglEnd = preferencesBorrow.getString(tglEndPref, null);
-//        int userId = preferencesBorrow.getInt(String.valueOf(usrIdPref),0);
-        String status = preferencesBorrow.getString(statusPref, null);
-        int total = preferencesBorrow.getInt(String.valueOf(totalPref),0);
-        idbook = preferencesBorrow.getInt(String.valueOf(idBook_pref), 0);
-        int price = preferencesBorrow.getInt(String.valueOf(price_pref), 0);
-        int qty = preferencesBorrow.getInt(String.valueOf(qty_pref),0);
-        int subtotal = preferencesBorrow.getInt(String.valueOf(subtotal_pref),0);
+        Borrow borrow = Utils.getBorrow();
+        List<BorrowData> borrowDList = Utils.getBorrowDataList();
+        tglStart = borrow.getStart_date();
+        String tglEnd = borrow.getEnd_date();
+        String status = borrow.getStatus();
+        int total = (int) borrow.getTotal();
+        BorrowData borrowData = borrowDList.get(0);
+        idbook = borrowData.getBook_id();
+        int price = (int) borrowData.getPrice();
+        int qty = borrowData.getQty();
+        int subtotal = (int) borrowData.getSubtotal();
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -119,7 +112,7 @@ public class KonfirmasiActivity extends AppCompatActivity {
                     @Override
                     public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
                         Request.Builder builder = chain.request().newBuilder();
-                        builder.addHeader("Authorization", "Bearer "+getToken());
+                        builder.addHeader("Authorization", "Bearer "+Utils.getToken());
                         return chain.proceed(builder.build());
                     }
 
@@ -130,6 +123,8 @@ public class KonfirmasiActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
+
+        usrId = Utils.getUsrId();
 
         Borrow borrowPref = new Borrow(
                 tglStart,
@@ -160,34 +155,51 @@ public class KonfirmasiActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     PinjamResponse pinjamResponse = response.body();
                     if (pinjamResponse.getStatus() == true){
-                        Toast.makeText(KonfirmasiActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KonfirmasiPinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        int idBoorow =  pinjamResponse.getBorrow().getId();
+                        Utils.setBorrowId(idBoorow);
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(KonfirmasiPinjamActivity.this, SuksesPinjamActivity.class));
+                            }
+                        },100);
+
                     }else {
-                        Toast.makeText(KonfirmasiActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KonfirmasiPinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }else {
-                    Toast.makeText(KonfirmasiActivity.this, "nothing response", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KonfirmasiPinjamActivity.this, "nothing response", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<PinjamResponse> call, Throwable t) {
                 String message = t.getLocalizedMessage();
-                Toast.makeText(KonfirmasiActivity.this, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(KonfirmasiPinjamActivity.this, message, Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private String getToken(){
-        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
-        String api_key = preferences.getString(key_api, null);
-        return api_key;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void iniViews() {
-        txtUser = findViewById(R.id.idHaiUser);
-        ePassword = findViewById(R.id.editTxtPassKonfirm);
         btnProses = findViewById(R.id.idProsesPinjam);
-
-        txtStart = findViewById(R.id.tglStart);
+        toolbar = findViewById(R.id.toolbarKonfirm);
+        txtUser = findViewById(R.id.idHaiUserPinjam);
+        ePassword = findViewById(R.id.editTxtPassKonfirmPinjam);
     }
+
 }

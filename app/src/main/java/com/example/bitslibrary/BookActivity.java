@@ -27,6 +27,7 @@ import com.example.bitslibrary.Fragment.MainFragment;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Models.Utils;
 import com.google.android.material.tabs.TabLayout;
 
 import org.jetbrains.annotations.NotNull;
@@ -59,10 +60,6 @@ public class BookActivity extends AppCompatActivity {
     private Book incomingBook;
     private Context context;
     private int id;
-
-    SharedPreferences preferences;
-    private static final String shared_pref_name = "myPref";
-    private static final String key_api = "api";
 
     private ProgressBar spinner;
 
@@ -100,7 +97,7 @@ public class BookActivity extends AppCompatActivity {
                     @Override
                     public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
                         Request.Builder builder = chain.request().newBuilder();
-                        builder.addHeader("Authorization", "Bearer "+getToken());
+                        builder.addHeader("Authorization", "Bearer "+ Utils.getToken());
                         return chain.proceed(builder.build());
                     }
 
@@ -137,8 +134,14 @@ public class BookActivity extends AppCompatActivity {
                         txtPrice.setText("Rp "+dformt.format(b.getPrice()));
                         Glide.with(BookActivity.this).load("https://upload.wikimedia.org/wikipedia/id/2/28/Koala_Kumal.jpg")
                                 .into(imageView);
+
+
                     }
+                    String nameBookpref = b.getName();
+                    String authorPref = b.getAuthor();
                 }
+
+//                List<Book> bookData = Arrays.asList(new Book[]{()});
 
                 btnPinjam.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -164,12 +167,6 @@ public class BookActivity extends AppCompatActivity {
         viewAdapterTabLayout.addFragment(new FragmentTabTentangBuku(),"TENTANG BUKU");
 
         viewPager.setAdapter(viewAdapterTabLayout);
-    }
-
-    public String getToken(){
-        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
-        String api_key = preferences.getString(key_api, null);
-        return api_key;
     }
 
     @Override

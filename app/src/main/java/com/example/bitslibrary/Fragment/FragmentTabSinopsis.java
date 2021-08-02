@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Models.Utils;
 import com.example.bitslibrary.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,9 +43,9 @@ public class FragmentTabSinopsis extends Fragment {
     private TextView sinopsisTxt;
     private Book incomingBook;
 
-    SharedPreferences preferences;
-    private static final String shared_pref_name = "myPref";
-    private static final String key_api = "api";
+//    SharedPreferences preferences;
+//    private static final String shared_pref_name = "myPref";
+//    private static final String key_api = "api";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +65,7 @@ public class FragmentTabSinopsis extends Fragment {
                     @Override
                     public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
                         Request.Builder builder = chain.request().newBuilder();
-                        builder.addHeader("Authorization", "Bearer "+getToken());
+                        builder.addHeader("Authorization", "Bearer "+ Utils.getToken());
                         return chain.proceed(builder.build());
                     }
 
@@ -105,9 +106,9 @@ public class FragmentTabSinopsis extends Fragment {
         return view;
     }
 
-    private String getToken(){
-        preferences = getContext().getSharedPreferences(shared_pref_name, MODE_PRIVATE);
-        String api_key = preferences.getString(key_api, null);
-        return api_key;
-    }
+//    private String getToken(){
+//        preferences = getContext().getSharedPreferences(shared_pref_name, MODE_PRIVATE);
+//        String api_key = preferences.getString(key_api, null);
+//        return api_key;
+//    }
 }

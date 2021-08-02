@@ -24,6 +24,21 @@
             android:layout_gravity="center"/>
     </androidx.appcompat.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerVertical="true">
+
+<!--        <ProgressBar-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/idProgbar"-->
+<!--            style="?android:attr/progressBarStyleLarge"-->
+<!--            android:layout_centerHorizontal="true"/>-->
+
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/idNamaAkun"
                 android:text="Nama"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="13dp"
                 android:textSize="17sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -80,7 +95,7 @@
                 android:id="@+id/idNoHpAkun"
                 android:layout_below="@+id/idNamaAkun"
                 android:text="No Hp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="18dp"
                 android:textSize="17sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -88,7 +103,7 @@
                 android:id="@+id/idEmailAkun"
                 android:layout_below="@+id/idNoHpAkun"
                 android:text="Email"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="22dp"
                 android:textSize="17sp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -96,7 +111,7 @@
                 android:id="@+id/idAlamatAkun"
                 android:layout_below="@+id/idEmailAkun"
                 android:text="Alamat"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="22dp"
                 android:textSize="17sp"/>
 
         </RelativeLayout>
@@ -108,77 +123,33 @@
             android:layout_marginLeft="50dp"
             android:layout_below="@+id/infoPribadi"
             android:layout_toRightOf="@+id/secondRel">
-            <TextView
-                android:layout_width="wrap_content"
+            <EditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/idDetailNamaAkun"
-                android:text="Nama User"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:textSize="17sp"/>
-            <TextView
+                android:textSize="17sp"
+                android:hint="Nama "/>
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:id="@+id/underline"
-                android:layout_below="@+id/idDetailNamaAkun"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@color/gray"
-                android:layout_marginTop="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/idDetailNoHpAkun"
-                android:layout_below="@+id/underline"
-                android:text="No Hp User"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:textSize="17sp"/>
-            <TextView
+                android:textSize="17sp"
+                android:layout_below="@+id/idDetailNamaAkun"
+                android:hint="No Hp User"/>
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:id="@+id/underline2"
-                android:layout_below="@+id/idDetailNoHpAkun"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@color/gray"
-                android:layout_marginTop="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/idDetailEmailAkun"
-                android:layout_below="@+id/underline2"
-                android:text="Email User"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:textSize="17sp"/>
-            <TextView
+                android:textSize="17sp"
+                android:layout_below="@+id/idDetailNoHpAkun"
+                android:hint="Email User" />
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:id="@+id/underline3"
-                android:layout_below="@+id/idDetailEmailAkun"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@color/gray"
-                android:layout_marginTop="5dp"/>
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/idDetailAlamatAkun"
-                android:layout_below="@+id/underline3"
-                android:text="Alamat User"
-                android:textStyle="bold"
-                android:layout_marginTop="10dp"
+                android:layout_below="@+id/idDetailEmailAkun"
+                android:hint="Alamat User"
                 android:textSize="17sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:id="@+id/underline4"
-                android:layout_below="@+id/idDetailAlamatAkun"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@color/gray"
-                android:layout_marginTop="5dp"/>
 
         </RelativeLayout>
 
@@ -190,7 +161,7 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_below="@+id/secondRel"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="45dp"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -198,28 +169,45 @@
             android:id="@+id/forthRel"
             android:layout_below="@+id/ubahSandi">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/idPasswordBaru"
-                android:lines="2"
-                android:hint="Kata sandi baru"/>
-            <EditText
+                app:passwordToggleEnabled="true"
+                android:id="@+id/layPass">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idPasswordBaru"
+                    android:lines="2"
+                    android:hint="Kata sandi baru"
+                    android:inputType="textPassword"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/idPasswordBaru"
-                android:layout_marginTop="15dp"
-                android:lines="2"
-                android:id="@+id/idUlangiPasswordBaru"
-                android:hint="Kata sandi baru"/>
+                app:passwordToggleEnabled="true"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/layPass"
+                android:id="@+id/layPass2">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/idUlangiPasswordBaru"
+                    android:lines="2"
+                    android:hint="Ulangi Kata sandi baru"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/idBtnSimpanPerubahanAkun"
                 android:text="Simpan Perubahan"
                 android:background="@drawable/custom_button"
-                android:layout_below="@+id/idUlangiPasswordBaru"
-                android:layout_marginTop="80dp"
+                android:layout_below="@+id/layPass2"
+                android:layout_marginTop="50dp"
                 android:textColor="#fff"
                 android:textAllCaps="false"/>
         </RelativeLayout>

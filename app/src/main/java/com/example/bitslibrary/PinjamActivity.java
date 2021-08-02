@@ -39,6 +39,7 @@ import com.example.bitslibrary.Models.BorrowData;
 import com.example.bitslibrary.Models.ItemPinjam;
 import com.example.bitslibrary.Models.PinjamRequest;
 import com.example.bitslibrary.Models.PinjamResponse;
+import com.example.bitslibrary.Models.Utils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +47,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -60,9 +62,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PinjamActivity extends AppCompatActivity {
-    private TextView txtId, txtName, txtAuthor, txtJml, txtPrice, txtQty, txtDetailName, txtSubtotal,
-            txtTotal, statusN, txtTotalBuku, txtDurasi, userId, tess, subtotal, totalVal;
+    private TextView  txtName, txtAuthor, txtJml, txtDetailName, txtSubtotal,
+            txtTotal, txtTotalBuku, txtDurasi, userId, tess, totalVal;
     private ImageView imgView;
+    private TextView statusN, txtId, txtPrice, txtQty, subtotal;
     private EditText edtTgPinjam, edtTglAkhirPinjam;
     private DatePickerDialog datePickerDialogStart, datePickerDialogEnd;
     private SimpleDateFormat dateFormat;
@@ -84,18 +87,19 @@ public class PinjamActivity extends AppCompatActivity {
     private static final int key_usrId = 0;
     private static final String key_api = "api";
 
-    private static final String shared_pref_name_borrow = "borrowPref";
-    private static final String tglStartPref = "tglStart";
-    private static final String tglEndPref = "tglEnd";
-    private static final int usrIdPref = 0;
-    private static final String statusPref = "status";
-    private static final int totalPref = 0;
+//    private static final String shared_pref_name_borrow = "borrowPref";
+//    private static final String tglStartPref = "tglStart";
+//    private static final String tglEndPref = "tglEnd";
+//    private static final int usrIdPref = 0;
+//    private static final String statusPref = "status";
+//    private static final int totalPref = 0;
+//
+//    private static final String shared_pref_name_borrowData = "borrowDataPref";
+//    private static final int idBook_pref = 0;
+//    private static final int price_pref = 0;
+//    private static final int qty_pref = 0;
+//    private static final int subtotal_pref = 0;
 
-    private static final String shared_pref_name_borrowData = "borrowDataPref";
-    private static final int idBook_pref = 0;
-    private static final int price_pref = 0;
-    private static final int qty_pref = 0;
-    private static final int subtotal_pref = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,7 +202,7 @@ public class PinjamActivity extends AppCompatActivity {
 
     public void konfirmasiPinjam(){
 
-        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
+//        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
         String edtTglStartPref = edtTgPinjam.getText().toString();
         String edtTglEndPref = edtTglAkhirPinjam.getText().toString();
         int usrIdPrefInt = usrId;
@@ -210,22 +214,27 @@ public class PinjamActivity extends AppCompatActivity {
         int qty = Integer.parseInt(txtQty.getText().toString());
         int subtotal2 = Integer.parseInt(subtotal.getText().toString());
 
-        SharedPreferences.Editor editor = preferencesBorrow.edit();
-        editor.putString(tglStartPref, edtTglStartPref);
-        editor.putString(tglEndPref, edtTglEndPref);
-        editor.putInt(String.valueOf(usrIdPref), usrIdPrefInt);
-        editor.putString(statusPref, statusNPref);
-        editor.putInt(String.valueOf(totalPref),totalPrefInt);
-        editor.putInt(String.valueOf(idBook_pref), idbook);
-        editor.putInt(String.valueOf(price_pref), price);
-        editor.putInt(String.valueOf(qty_pref), qty);
-        editor.putInt(String.valueOf(subtotal_pref), subtotal2);
-        editor.apply();
+//        SharedPreferences.Editor editor = preferencesBorrow.edit();
+//        editor.putString(tglStartPref, edtTglStartPref);
+//        editor.putString(tglEndPref, edtTglEndPref);
+//        editor.putInt(String.valueOf(usrIdPref), usrIdPrefInt);
+//        editor.putString(statusPref, statusNPref);
+//        editor.putInt(String.valueOf(totalPref),totalPrefInt);
+//        editor.putInt(String.valueOf(idBook_pref), idbook);
+//        editor.putInt(String.valueOf(price_pref), price);
+//        editor.putInt(String.valueOf(qty_pref), qty);
+//        editor.putInt(String.valueOf(subtotal_pref), subtotal2);
+//        editor.apply();
+
+        Borrow borrow = new Borrow(edtTglStartPref, edtTglEndPref, usrId, statusNPref, totalPrefInt);
+        Utils.setBorrow(borrow);
+        List<BorrowData> borrowData = Arrays.asList(new BorrowData[]{new BorrowData(idbook, qty, price, subtotal2)});
+        Utils.setBorrowDataList(borrowData);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(PinjamActivity.this, KonfirmasiActivity.class));
+                startActivity(new Intent(PinjamActivity.this, KonfirmasiPinjamActivity.class));
             }
         },500);
     }
@@ -242,7 +251,7 @@ public class PinjamActivity extends AppCompatActivity {
                     @Override
                     public okhttp3.Response intercept(@NotNull Chain chain) throws IOException {
                         Request.Builder builder = chain.request().newBuilder();
-                        builder.addHeader("Authorization", "Bearer "+getToken());
+                        builder.addHeader("Authorization", "Bearer "+Utils.getToken());
                         return chain.proceed(builder.build());
                     }
 
@@ -265,11 +274,9 @@ public class PinjamActivity extends AppCompatActivity {
 
         PinjamRequest pinjamRequest = new PinjamRequest();
         List<BorrowData> bData = new ArrayList<BorrowData>();
-
-        for (BorrowData borrowData : new PinjamRequest().borrowDataList()){
-
-
-
+//
+//        for (BorrowData borrowData : new PinjamRequest().borrowDataList()){
+//
 //            ItemPinjam itemPinjam = null;
 //            double d = itemPinjam.getBook().getPrice();
 //            long l = (new Double(d)).longValue();
@@ -280,8 +287,8 @@ public class PinjamActivity extends AppCompatActivity {
 //            borrowData.setQty(itemPinjam.getQty());
 //            borrowData.setSubtotal(sub);
 //            bData.add(borrowData);
-//            pinjamRequest.getBorrowd().add(borrowData);
-        }
+//        }
+//        pinjamRequest.setBorrowd(bData);
 
 //        ItemPinjam itemPinjam = new ItemPinjam();
 //        double d = txtPrice.getId();
@@ -474,12 +481,6 @@ public class PinjamActivity extends AppCompatActivity {
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialogEnd.show();
-    }
-
-    public String getToken(){
-        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
-        String api_key = preferences.getString(key_api, null);
-        return api_key;
     }
 
     @Override
