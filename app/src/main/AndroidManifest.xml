@@ -11,11 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BitsLibrary">
-        <activity android:name=".KonfirmasiPerubahanActivity"
-            android:label=""></activity>
-        <activity android:name=".KonfirmasiPinjamActivity"
-            android:label="">
-        </activity>
+        <activity android:name=".SuksesPengembalianActivity"></activity>
+        <activity android:name=".KonfirmasiPengembalianActivity"
+            android:label=""/>
+        <activity
+            android:name=".KonfirmasiPerubahanActivity"
+            android:label="" />
+        <activity
+            android:name=".KonfirmasiPinjamActivity"
+            android:label="" />
         <activity android:name=".SuksesPinjamActivity" />
         <activity
             android:name=".PengaturanAkunActivity"

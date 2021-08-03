@@ -9,7 +9,7 @@ public class Utils {
     public static String token;
     public static int usrId;
     public static String namaUser, nohpUser, emailUser, alamatUser, passBaru, ulangiPass;
-    public static String passKonfirm;
+    public static String passKonfirm, namaBuku, authorBuku;
     public static List<Book> bookList;
 
 
@@ -115,5 +115,21 @@ public class Utils {
 
     public static void setBookList(List<Book> bookList) {
         Utils.bookList = bookList;
+    }
+
+    public static String getNamaBuku() {
+        return namaBuku;
+    }
+
+    public static void setNamaBuku(String namaBuku) {
+        Utils.namaBuku = namaBuku;
+    }
+
+    public static String getAuthorBuku() {
+        return authorBuku;
+    }
+
+    public static void setAuthorBuku(String authorBuku) {
+        Utils.authorBuku = authorBuku;
     }
 }

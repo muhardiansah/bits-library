@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KonfirmasiPengembalianActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbarKonfirm"
+        app:titleTextColor="@color/black"
+        android:elevation="4dp">
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/user_ic"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/idImgKonform"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idHaiUserReturn"
+            android:text="Hai Username"
+            android:layout_marginTop="5dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/idImgKonform"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/masukanSandi"
+            android:text="Masukan kata sandi untuk melanjutkan"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/idHaiUserReturn"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="280dp"
+            app:passwordToggleEnabled="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/layPassword"
+            android:layout_below="@+id/masukanSandi"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:id="@+id/editTxtPassKonfirmReturn"
+                android:ems="10"
+                android:hint="Password"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/idLupaSandi"
+            android:layout_marginTop="15dp"
+            android:text="Lupa Kata Sandi ?"
+            android:layout_marginRight="65dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/layPassword"/>
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:id="@+id/idProsesPengembalian"
+        android:text="Proses Pengembalian"
+        android:background="@drawable/custom_button"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

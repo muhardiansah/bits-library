@@ -117,7 +117,7 @@
                 android:id="@+id/idAuthorPinjamDetail"
                 android:text="Author"
                 android:layout_toRightOf="@+id/idImgPinjamDetail"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="55dp"
                 android:layout_marginLeft="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -189,6 +189,19 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <Button
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:id="@+id/idKembalikanBuku"
+        android:text="Kembalikan Buku"
+        android:background="@drawable/custom_button"
+        android:textColor="#fff"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

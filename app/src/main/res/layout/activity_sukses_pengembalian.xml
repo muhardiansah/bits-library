@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#17C3B2"
+    android:padding="30dp"
+    tools:context=".SuksesPengembalianActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/borrowId"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="150dp"
+            android:id="@+id/icCheck"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="150dp"
+            android:background="@drawable/checlist2"/>
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/yeay"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/icCheck"
+            android:text="Yeay!"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/berhasil"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/yeay"
+            android:text="Buku berhasil dikembalikan"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/idKembaliBeranda"
+            android:background="@drawable/custom_button"
+            android:textColor="#fff"
+            android:text="Kembali ke Beranda"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+</RelativeLayout>

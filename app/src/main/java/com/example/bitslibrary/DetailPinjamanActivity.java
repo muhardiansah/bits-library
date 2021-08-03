@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,8 +47,9 @@ public class DetailPinjamanActivity extends AppCompatActivity {
             , jmlPcs, totalBayar;
     private ImageView imgView;
     private Toolbar toolbar;
+    private Button btnKembali;
     private Book book;
-    private final int position = 0;
+    private int borrowId;
 
     private ProgressBar spinner;
 
@@ -86,7 +90,7 @@ public class DetailPinjamanActivity extends AppCompatActivity {
                 .client(okHttpClient)
                 .build();
 
-        int borrowId  = Utils.getBorrowId();
+        borrowId  = Utils.getBorrowId();
         DecimalFormat dformt = new DecimalFormat();
 
         UserService userService = retrofit.create(UserService.class);
@@ -102,17 +106,16 @@ public class DetailPinjamanActivity extends AppCompatActivity {
                         String tgl_start =  detailPinjamResponse.getData().getBorrow().getStart_date();
                         String tgl_end = detailPinjamResponse.getData().getBorrow().getEnd_date();
                         int total = detailPinjamResponse.getData().getBorrow().getTotal();
+
                         tglStart.setText(tgl_start);
                         tglEnd.setText(tgl_end);
+                        bookName.setText(Utils.getNamaBuku());
+                        author.setText("Oleh: "+Utils.getAuthorBuku());
                         List<BorrowDataResponse> bDataList =  new ArrayList<>(Arrays.asList(detailPinjamResponse.getData().getBorrowd()));
                         List<Book> bookList;
                         for (BorrowDataResponse bRes : bDataList){
-//                            if (bRes.getBook_id() == book.getId()){
-//                                book.getName();
-//                                book.getAuthor();
-//                            }
                             jmlPcs.setText(String.valueOf(bRes.getQty())+" pcs");
-                            subtotal.setText("Rp "+dformt.format(bRes.getSubtotal())+", ");
+                            subtotal.setText("Rp "+dformt.format(bRes.getSubtotal())+",");
                         }
                         totalBayar.setText("Rp "+dformt.format(total));
                     }else {
@@ -131,6 +134,24 @@ public class DetailPinjamanActivity extends AppCompatActivity {
             }
         });
 
+        btnKembali.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                konfirmasiKembalikan();
+            }
+        });
+
+    }
+
+    private void konfirmasiKembalikan(){
+//        int borrowId = Utils.getBorrowId();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(DetailPinjamanActivity.this, KonfirmasiPengembalianActivity.class));
+            }
+        },500);
     }
 
     @Override
@@ -154,6 +175,7 @@ public class DetailPinjamanActivity extends AppCompatActivity {
         jmlPcs = findViewById(R.id.idPcsBookDetail);
         toolbar = findViewById(R.id.toolbarDetailPinjam);
         totalBayar = findViewById(R.id.idTotalBayar);
+        btnKembali = findViewById(R.id.idKembalikanBuku);
 
         spinner = (ProgressBar) findViewById(R.id.idProgbar);
     }

@@ -191,15 +191,6 @@ public class PinjamActivity extends AppCompatActivity {
 
     }
 
-    private void tes(){
-        int idbook = Integer.parseInt(txtId.getText().toString());
-        int price = Integer.parseInt(txtPrice.getText().toString());
-        int qty = Integer.parseInt(txtQty.getText().toString());
-        int subtotal2 = Integer.parseInt(subtotal.getText().toString());
-        String tgl = edtTgPinjam.getText().toString();
-        Toast.makeText(this, "id nya : "+idbook+" "+price+" "+qty+" "+subtotal2, Toast.LENGTH_SHORT).show();
-    }
-
     public void konfirmasiPinjam(){
 
 //        preferencesBorrow = getSharedPreferences(shared_pref_name_borrow, MODE_PRIVATE);
@@ -213,6 +204,9 @@ public class PinjamActivity extends AppCompatActivity {
         int price = Integer.parseInt(txtPrice.getText().toString());
         int qty = Integer.parseInt(txtQty.getText().toString());
         int subtotal2 = Integer.parseInt(subtotal.getText().toString());
+
+        String namaBook = txtName.getText().toString();
+        String author = txtAuthor.getText().toString();
 
 //        SharedPreferences.Editor editor = preferencesBorrow.edit();
 //        editor.putString(tglStartPref, edtTglStartPref);
@@ -230,6 +224,8 @@ public class PinjamActivity extends AppCompatActivity {
         Utils.setBorrow(borrow);
         List<BorrowData> borrowData = Arrays.asList(new BorrowData[]{new BorrowData(idbook, qty, price, subtotal2)});
         Utils.setBorrowDataList(borrowData);
+        Utils.setNamaBuku(namaBook);
+        Utils.setAuthorBuku(author);
 
         new Handler().postDelayed(new Runnable() {
             @Override

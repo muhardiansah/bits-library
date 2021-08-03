@@ -2,11 +2,13 @@ package com.example.bitslibrary.Api;
 
 import com.example.bitslibrary.Models.BookResponse;
 import com.example.bitslibrary.Models.BorrowResponse;
+import com.example.bitslibrary.Models.DaftarPinjamanResponse;
 import com.example.bitslibrary.Models.DetailPinjamResponse;
 import com.example.bitslibrary.Models.LoginRequest;
 import com.example.bitslibrary.Models.LoginResponse;
 import com.example.bitslibrary.Models.PinjamRequest;
 import com.example.bitslibrary.Models.PinjamResponse;
+import com.example.bitslibrary.Models.ReturnResponse;
 import com.example.bitslibrary.Models.UserRequest;
 import com.example.bitslibrary.Models.UserResponse;
 import com.example.bitslibrary.Models.Utils;
@@ -44,5 +46,11 @@ public interface UserService {
             @Path("usrId") int usrId,
             @Body UserRequest userRequest
             );
+
+    @POST("return/{borrowIdReturn}")
+    Call<ReturnResponse> returnBook(@Path("borrowIdReturn") int borrowIdReturn);
+
+    @GET("borrow/index/{userId}")
+    Call<DaftarPinjamanResponse> getPinjaman(@Path("userId") int userId);
 
 }

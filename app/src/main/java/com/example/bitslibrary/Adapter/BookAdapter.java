@@ -44,6 +44,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>  {
         return holder;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called");
