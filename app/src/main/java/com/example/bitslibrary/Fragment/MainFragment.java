@@ -132,8 +132,21 @@ public class MainFragment extends Fragment {
 
                 bookList = new ArrayList<>(Arrays.asList(bookResponse.getData()));
 
+                List<Book> bookListPinjam = new ArrayList<Book>();
+
+                for (Book b : bookList){
+                    b.getId();
+                    b.getName();
+                    b.getAuthor();
+                    bookListPinjam.add(b);
+                }
+
+                Utils.setBookList(bookListPinjam);
+
                 bookPopulerAdapter = new BookAdapter(getActivity(), bookList);
                 bookTerbaruAdapter = new BookAdapter(getActivity(), bookList);
+
+
 
                 recViewPopuler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
                 recViewTerbaru.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));

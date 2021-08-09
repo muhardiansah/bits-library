@@ -2,48 +2,58 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/parentListPinjam">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="#FAFAFA"
+        android:paddingTop="15dp"
         android:id="@+id/idDaftarPinjam">
-        <TextView
-            android:layout_width="wrap_content"
+<!--        <ProgressBar-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/idProgbar"-->
+<!--            android:layout_centerHorizontal="true"/>-->
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/idNameBookDaftarPinjaman"
-            android:text="Name Book"
-            android:textStyle="bold"
-            android:textSize="18sp"/>
+            android:id="@+id/tabListBuku">
+        </TableLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/idPinjamStartDate"
             android:textSize="15sp"
+            android:textStyle="bold"
             android:text="Cont: 20 Sep 2020 -"
-            android:layout_below="@+id/idNameBookDaftarPinjaman"
+            android:layout_below="@+id/tabListBuku"
             android:layout_marginTop="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/idPinjamEndDate"
             android:textSize="15sp"
+            android:textStyle="bold"
             android:text=" 23 Sep 2020"
             android:layout_toRightOf="@+id/idPinjamStartDate"
-            android:layout_marginLeft="10dp"
-            android:layout_below="@+id/idNameBookDaftarPinjaman"
+
+            android:layout_below="@+id/tabListBuku"
             android:layout_marginTop="5dp"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:id="@+id/underline2"
             android:layout_below="@+id/idPinjamEndDate"
             android:textSize="14sp"
             android:textStyle="bold"
             android:background="@color/gray"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="15dp"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

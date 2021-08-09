@@ -9,10 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bitslibrary.Adapter.PinjamanAdapter;
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Models.Book;
 import com.example.bitslibrary.Models.DaftarPinjamanDataResponse;
 import com.example.bitslibrary.Models.DaftarPinjamanResponse;
 import com.example.bitslibrary.Models.Utils;
@@ -40,12 +45,17 @@ public class FragmentDipinjam extends Fragment {
     private RecyclerView recViewDipinjam;
     private PinjamanAdapter pinjamanAdapter;
     private List<DaftarPinjamanDataResponse> dataList;
+    private TextView tesId;
+
+    private ProgressBar spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_dipinjam, container, false);
 
         initViews(view);
+
+        spinner.setVisibility(View.VISIBLE);
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -78,13 +88,33 @@ public class FragmentDipinjam extends Fragment {
             public void onResponse(Call<DaftarPinjamanResponse> call, Response<DaftarPinjamanResponse> response) {
                 if (response.isSuccessful()){
                     DaftarPinjamanResponse daftarPinjamanResponse = response.body();
+                    spinner.setVisibility(View.GONE);
                     if (daftarPinjamanResponse.isStatus() == true){
-
                         Toast.makeText(getActivity(), daftarPinjamanResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
 
                         dataList = new ArrayList<>(Arrays.asList(daftarPinjamanResponse.getData()));
 
-                        pinjamanAdapter = new PinjamanAdapter(getActivity(), dataList);
+                        List<DaftarPinjamanDataResponse> adaPinjamList = new ArrayList<DaftarPinjamanDataResponse>();
+//                        List<DaftarPinjamanDataResponse> ambilId = new ArrayList<DaftarPinjamanDataResponse>();
+
+
+
+                        for(DaftarPinjamanDataResponse a : dataList) {
+                            if (a.getStatus().equals("N")) {
+                                adaPinjamList.add(a);
+                            }
+                        }
+
+//                        for (DaftarPinjamanDataResponse id : dataList){
+//                            id.getId();
+//                            ambilId.add(id);
+//                            tesId.setText(String.valueOf(id.getId()));
+//                        }
+//
+//                        List<DaftarPinjamanDataResponse> getAmbilId;
+
+                        pinjamanAdapter = new PinjamanAdapter(getActivity(), adaPinjamList);
 
                         recViewDipinjam.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
 
@@ -107,7 +137,9 @@ public class FragmentDipinjam extends Fragment {
         return view;
     }
 
+
     private void initViews(View view){
         recViewDipinjam = (RecyclerView) view.findViewById(R.id.idRecViewDipinjam);
+        spinner = (ProgressBar) view.findViewById(R.id.idProgbar);
     }
 }

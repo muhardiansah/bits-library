@@ -8,7 +8,6 @@ public class Book implements Serializable {
     @SerializedName("id")
     private int id;
     private String name;
-    private String imgUrl;
     private String author;
     private String isbn;
     private String isbn_13;
@@ -20,12 +19,11 @@ public class Book implements Serializable {
     private int price;
     private int fineamt;
 
-    public Book(int id, String name, String imgUrl, String author, String isbn, String isbn_13,
+    public Book(int id, String name, String author, String isbn, String isbn_13,
                 String genre, String language, String date_pub, int pages, String sinopsis,
                 int price, int fineamt) {
         this.id = id;
         this.name = name;
-        this.imgUrl = imgUrl;
         this.author = author;
         this.isbn = isbn;
         this.isbn_13 = isbn_13;
@@ -36,6 +34,9 @@ public class Book implements Serializable {
         this.sinopsis = sinopsis;
         this.price = price;
         this.fineamt = fineamt;
+    }
+
+    public Book(String nameBook, String author, String isbn, String isbn13, String genre, String language, String date_pub, int pages, String sinopsis, int price, int fineamt) {
     }
 
     public int getId() {
@@ -52,14 +53,6 @@ public class Book implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
     }
 
     public String getAuthor() {
@@ -147,7 +140,6 @@ public class Book implements Serializable {
         return "Book{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", imgUrl='" + imgUrl + '\'' +
                 ", author='" + author + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", isbn_13='" + isbn_13 + '\'' +

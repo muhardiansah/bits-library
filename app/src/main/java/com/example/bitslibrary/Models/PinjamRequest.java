@@ -6,8 +6,8 @@ import java.util.List;
 
 public class PinjamRequest {
     private Borrow borrow;
-    private List<BorrowData> borrowd = new ArrayList<BorrowData>();
-
+//    private List<BorrowData> borrowd = new ArrayList<BorrowData>();
+    private List<ItemPinjam> borrowd = new ArrayList<ItemPinjam>();
     public PinjamRequest() {
     }
 
@@ -15,9 +15,9 @@ public class PinjamRequest {
         this.borrow = borrow;
     }
 
-    public List<BorrowData> borrowDataList(){
-        return borrowd;
-    }
+//    public List<BorrowData> borrowDataList(){
+//        return borrowd;
+//    }
 
     public Borrow getBorrow() {
         return borrow;
@@ -27,11 +27,20 @@ public class PinjamRequest {
         this.borrow = borrow;
     }
 
-    public List<BorrowData> getBorrowd() {
+//    public List<BorrowData> getBorrowd() {
+//        return borrowd;
+//    }
+
+//    public void setBorrowd(List<BorrowData> borrowd) {
+//        this.borrowd = borrowd;
+//    }
+
+
+    public List<ItemPinjam> getBorrowd() {
         return borrowd;
     }
 
-    public void setBorrowd(List<BorrowData> borrowd) {
+    public void setBorrowd(List<ItemPinjam> borrowd) {
         this.borrowd = borrowd;
     }
 }

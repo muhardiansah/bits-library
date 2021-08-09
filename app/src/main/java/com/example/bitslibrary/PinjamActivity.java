@@ -45,6 +45,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,7 +70,7 @@ public class PinjamActivity extends AppCompatActivity {
     private EditText edtTgPinjam, edtTglAkhirPinjam;
     private DatePickerDialog datePickerDialogStart, datePickerDialogEnd;
     private SimpleDateFormat dateFormat;
-    private TableLayout tabLayoutCart, tabLayoutDetail;
+    public TableLayout tabLayoutCart, tabLayoutDetail;
     private CheckBox cbPinjam;
 
     private RelativeLayout rlCart, rlDetail;
@@ -182,7 +183,6 @@ public class PinjamActivity extends AppCompatActivity {
                         TextUtils.isEmpty(edtTglAkhirPinjam.getText().toString())){
                     Toast.makeText(PinjamActivity.this, "Isi dengan lengkap", Toast.LENGTH_LONG).show();
                 }else {
-//                    tes();
                     konfirmasiPinjam();
 //                    postPinjam();
                 }
@@ -224,8 +224,8 @@ public class PinjamActivity extends AppCompatActivity {
         Utils.setBorrow(borrow);
         List<BorrowData> borrowData = Arrays.asList(new BorrowData[]{new BorrowData(idbook, qty, price, subtotal2)});
         Utils.setBorrowDataList(borrowData);
-        Utils.setNamaBuku(namaBook);
-        Utils.setAuthorBuku(author);
+//        Utils.setNamaBuku(namaBook);
+//        Utils.setAuthorBuku(author);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -269,63 +269,85 @@ public class PinjamActivity extends AppCompatActivity {
 
 
         PinjamRequest pinjamRequest = new PinjamRequest();
-        List<BorrowData> bData = new ArrayList<BorrowData>();
+
+
+//        List<BorrowData> bData = new ArrayList<BorrowData>();
+
+//        for (BorrowData borrowData:bData){
+//            borrowData.setBook_id(Integer.parseInt(txtId.getText().toString()));
+//            borrowData.setPrice(Integer.parseInt(txtPrice.getText().toString()));
+//            borrowData.setQty(Integer.parseInt(txtQty.getText().toString()));
+//            borrowData.setSubtotal(Integer.parseInt(subtotal.getText().toString()));
+//            pinjamRequest.getBorrowd().add(borrowData);
+//        }
+//        pinjamRequest.setBorrow(borrow);
+//        pinjamRequest.setBorrowd(pinjamRequest.getBorrowd());
+
+//        List<BorrowData> borrowDataList = new ArrayList<BorrowData>();
 //
-//        for (BorrowData borrowData : new PinjamRequest().borrowDataList()){
+//        BorrowData borrowDataPref = new BorrowData();
+//        borrowDataPref.setBook_id(Integer.parseInt(txtId.getText().toString()));
+//        borrowDataPref.setPrice(Integer.parseInt(txtPrice.getText().toString()));
+//        borrowDataPref.setQty(Integer.parseInt(txtQty.getText().toString()));
+//        borrowDataPref.setSubtotal(Integer.parseInt(subtotal.getText().toString()));
+//        borrowDataList.add(borrowDataPref);
 //
-//            ItemPinjam itemPinjam = null;
-//            double d = itemPinjam.getBook().getPrice();
-//            long l = (new Double(d)).longValue();
-//            double val = itemPinjam.getBook().getPrice() * itemPinjam.getQty();
-//            long sub = (new Double(val)).longValue();
-//            borrowData.setBook_id(itemPinjam.getBook().getId());
-//            borrowData.setPrice(l);
-//            borrowData.setQty(itemPinjam.getQty());
-//            borrowData.setSubtotal(sub);
+////        List<BorrowData> bData = new ArrayList<BorrowData>();
+////
+////
+//        for (BorrowData borrowData : bData){
+//            borrowData.setBook_id(Integer.parseInt(txtId.getText().toString()));
+//            borrowData.setPrice(Integer.parseInt(txtPrice.getText().toString()));
+//            borrowData.setQty(Integer.parseInt(txtQty.getText().toString()));
+//            borrowData.setSubtotal(Integer.parseInt(subtotal.getText().toString()));
 //            bData.add(borrowData);
 //        }
-//        pinjamRequest.setBorrowd(bData);
+//
+//        pinjamRequest.setBorrow(borrow);
+//        pinjamRequest.setBorrowd(borrowDataList);
 
-//        ItemPinjam itemPinjam = new ItemPinjam();
-//        double d = txtPrice.getId();
-//        long l = (new Double(d)).longValue();
-//        double val = txtSubtotal.getId();
-//        long sub = (new Double(val)).longValue();
-        BorrowData borrowData = new BorrowData();
-        borrowData.setBook_id(Integer.parseInt(txtId.getText().toString()));
-        borrowData.setPrice(Integer.parseInt(txtPrice.getText().toString()));
-        borrowData.setQty(Integer.parseInt(txtQty.getText().toString()));
-        borrowData.setSubtotal(Integer.parseInt(subtotal.getText().toString()));
-        bData.add(borrowData);
+        PinjamRequest pinjamRequestItem = new PinjamRequest();
 
+        List<ItemPinjam> itemD = new ArrayList<ItemPinjam>();
+
+        for (ItemPinjam itemPinjamList : CartPinjam.contents()){
+            itemPinjamList.setBook_id(itemPinjamList.getBook().getId());
+            itemPinjamList.setQty(itemPinjamList.getQty());
+            itemPinjamList.setPrice(itemPinjamList.getBook().getPrice());
+            itemPinjamList.setSubtotal(itemPinjamList.getBook().getPrice()*itemPinjamList.getQty());
+            itemD.add(itemPinjamList);
+        }
         pinjamRequest.setBorrow(borrow);
-        pinjamRequest.setBorrowd(bData);
+        pinjamRequest.setBorrowd(itemD);
 
-        UserService userService = retrofit.create(UserService.class);
-        Call<PinjamResponse> call  = userService.pinjam(pinjamRequest);
-        call.enqueue(new Callback<PinjamResponse>() {
-            @Override
-            public void onResponse(Call<PinjamResponse> call, Response<PinjamResponse> response) {
-                if (response.isSuccessful()){
-                    PinjamResponse pinjamResponse = response.body();
-                    if (pinjamResponse.getStatus() == true){
-                        Toast.makeText(PinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
-                    }else {
-                        Toast.makeText(PinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_LONG).show();
-                    }
+        Toast.makeText(this, "sudah klik", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Toast.makeText(PinjamActivity.this, "Nothing response", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PinjamResponse> call, Throwable t) {
-                String message = t.getLocalizedMessage();
-                Toast.makeText(PinjamActivity.this, message, Toast.LENGTH_LONG).show();
-            }
-        });
+//        UserService userService = retrofit.create(UserService.class);
+//        Call<PinjamResponse> call  = userService.pinjam(pinjamRequest);
+//        call.enqueue(new Callback<PinjamResponse>() {
+//            @Override
+//            public void onResponse(Call<PinjamResponse> call, Response<PinjamResponse> response) {
+//                if (response.isSuccessful()){
+//                    PinjamResponse pinjamResponse = response.body();
+//                    if (pinjamResponse.getStatus() == true){
+//                        Toast.makeText(PinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                    }else {
+//                        Toast.makeText(PinjamActivity.this, pinjamResponse.getMessage(), Toast.LENGTH_LONG).show();
+//                    }
+//
+//                }else {
+//                    Toast.makeText(PinjamActivity.this, "Nothing response", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<PinjamResponse> call, Throwable t) {
+//                String message = t.getLocalizedMessage();
+//                Toast.makeText(PinjamActivity.this, message, Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
     public void addCart(){
@@ -448,7 +470,6 @@ public class PinjamActivity extends AppCompatActivity {
         txtTotal.setText("Rp "+dformt.format(CartPinjam.total()));
 
     }
-
 
 
     private void showDateDialogPinjam() {

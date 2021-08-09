@@ -4,14 +4,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +35,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Interceptor;
@@ -47,11 +58,17 @@ public class DetailPinjamanActivity extends AppCompatActivity {
             , jmlPcs, totalBayar;
     private ImageView imgView;
     private Toolbar toolbar;
-    private Button btnKembali;
+    private Button btnKembalikan;
     private Book book;
-    private int borrowId;
+    private int borrowId, intentId;
+    private List<BorrowDataResponse> bDataList;
+    private TableLayout tabDetailPinjam;
+    private DecimalFormat dformt = new DecimalFormat();
+    private RelativeLayout rlDetailPinjam;
+    private List<Book> bookListDetail;
 
     private ProgressBar spinner;
+    private Context context;
 
 
     @Override
@@ -67,8 +84,20 @@ public class DetailPinjamanActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        spinner.setVisibility(View.VISIBLE);
+//        btnKembalikan.setEnabled(false);
 
+        getIntent();
+        try {
+//            intentId = intent.getIntExtra("borrowId",0);
+            spinner.setVisibility(View.VISIBLE);
+            setViewsValues();
+        }catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setViewsValues(){
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -91,7 +120,7 @@ public class DetailPinjamanActivity extends AppCompatActivity {
                 .build();
 
         borrowId  = Utils.getBorrowId();
-        DecimalFormat dformt = new DecimalFormat();
+
 
         UserService userService = retrofit.create(UserService.class);
         Call<DetailPinjamResponse> call = userService.getDetailPinjam(borrowId);
@@ -105,19 +134,72 @@ public class DetailPinjamanActivity extends AppCompatActivity {
                         Toast.makeText(DetailPinjamanActivity.this, detailPinjamResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         String tgl_start =  detailPinjamResponse.getData().getBorrow().getStart_date();
                         String tgl_end = detailPinjamResponse.getData().getBorrow().getEnd_date();
+                        String status = detailPinjamResponse.getData().getBorrow().getStatus();
                         int total = detailPinjamResponse.getData().getBorrow().getTotal();
+//                        Toast.makeText(DetailPinjamanActivity.this, status, Toast.LENGTH_SHORT).show();
 
-                        tglStart.setText(tgl_start);
-                        tglEnd.setText(tgl_end);
-                        bookName.setText(Utils.getNamaBuku());
-                        author.setText("Oleh: "+Utils.getAuthorBuku());
-                        List<BorrowDataResponse> bDataList =  new ArrayList<>(Arrays.asList(detailPinjamResponse.getData().getBorrowd()));
-                        List<Book> bookList;
-                        for (BorrowDataResponse bRes : bDataList){
-                            jmlPcs.setText(String.valueOf(bRes.getQty())+" pcs");
-                            subtotal.setText("Rp "+dformt.format(bRes.getSubtotal())+",");
+                        String dateNowStart = tgl_start;
+                        SimpleDateFormat format_now = new SimpleDateFormat("yyyy-MM-dd");
+                        Date new_Date = null;
+                        String dateViewStart = null;
+                        try {
+                            new_Date = format_now.parse(dateNowStart);
+                            format_now = new SimpleDateFormat("dd MMM yyyy");
+                            dateViewStart = format_now.format(new_Date);
+                        }catch (ParseException e){
+                            e.printStackTrace();
                         }
-                        totalBayar.setText("Rp "+dformt.format(total));
+
+                        String dateNowEnd = tgl_end;
+                        SimpleDateFormat format_now2 = new SimpleDateFormat("yyyy-MM-dd");
+                        Date new_Date2 = null;
+                        String dateViewEnd = null;
+                        try {
+                            new_Date2 = format_now2.parse(dateNowEnd);
+                            format_now2 = new SimpleDateFormat("dd MMM yyyy");
+                            dateViewEnd = format_now2.format(new_Date2);
+                        }catch (ParseException e){
+                            e.printStackTrace();
+                        }
+
+                        tglStart.setText(dateViewStart);
+                        tglEnd.setText(dateViewEnd);
+
+                        if (status.equals("N")){
+                            btnKembalikan.setBackgroundResource(R.drawable.custom_button);
+                            btnKembalikan.setTextColor(getResources().getColor(R.color.white));
+                            btnKembalikan.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    konfirmasiKembalikan();
+                                }
+                            });
+                        }else if(status.equals("F")){
+                            btnKembalikan.setEnabled(false);
+                            btnKembalikan.setText("Sudah Dikembalikan");
+                            tglStart.setTextColor(getResources().getColor(R.color.black));
+                            tglEnd.setTextColor(getResources().getColor(R.color.black));
+                            totalBayar.setTextColor(getResources().getColor(R.color.black));;
+                        }
+
+                        bDataList =  new ArrayList<>(Arrays.asList(detailPinjamResponse.getData().getBorrowd()));
+
+                        boolean cekData = bDataList.isEmpty();
+                        if (cekData == true){
+                            TextView textViewEmpty = new TextView(getApplicationContext());
+                            textViewEmpty.setText("Data Kosong");
+                            textViewEmpty.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+                            textViewEmpty.setTextSize(16);
+                            textViewEmpty.setPadding(250,0,0,0);
+                            tabDetailPinjam.addView(textViewEmpty);
+                            totalBayar.setText("Rp "+String.valueOf(0));
+                        }else {
+                            fillDetailPinjam();
+                            totalBayar.setText("Rp "+dformt.format(total));
+                        }
+
+
+
                     }else {
                         Toast.makeText(DetailPinjamanActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -134,13 +216,48 @@ public class DetailPinjamanActivity extends AppCompatActivity {
             }
         });
 
-        btnKembali.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                konfirmasiKembalikan();
-            }
-        });
 
+    }
+
+    private void fillDetailPinjam(){
+        LayoutInflater inflaterDetailPinjam = LayoutInflater.from(this);
+
+        for (BorrowDataResponse bRes : bDataList){
+
+            TableRow tableRowDetailPinjam = new TableRow(this);
+            tableRowDetailPinjam.setLayoutParams(new TableLayout.LayoutParams(
+                    TableRow.LayoutParams.FILL_PARENT,
+                    TableRow.LayoutParams.WRAP_CONTENT
+            ));
+
+            rlDetailPinjam = (RelativeLayout) inflaterDetailPinjam.inflate(R.layout.rel_buku_pinjaman,null);
+            bookName = (TextView) rlDetailPinjam.findViewById(R.id.idNameBookPinjamDetail);
+            author = (TextView) rlDetailPinjam.findViewById(R.id.idAuthorPinjamDetail);
+            subtotal = (TextView) rlDetailPinjam.findViewById(R.id.idBiayaPinjamDetail);
+            jmlPcs = (TextView) rlDetailPinjam.findViewById(R.id.idPcsBookDetail);
+
+            bookListDetail = Utils.getBookList();
+//            Book bookdata = bookListDetail.get(0);
+//            int bookId = bookdata.getId();
+//            String nameBookDetail = bookdata.getName();
+//            String authorBook = bookdata.getAuthor();
+
+            for (Book bo:bookListDetail){
+                if (bRes.getBook_id() == bo.getId()){
+                    bookName.setText(bo.getName());
+                    author.setText("Oleh:"+bo.getAuthor());
+                }
+
+            }
+
+
+
+            jmlPcs.setText(String.valueOf(bRes.getQty())+" pcs");
+            subtotal.setText("Rp "+dformt.format(bRes.getSubtotal())+",");
+
+            tableRowDetailPinjam.addView(rlDetailPinjam);
+            tabDetailPinjam.addView(tableRowDetailPinjam);
+        }
     }
 
     private void konfirmasiKembalikan(){
@@ -169,13 +286,10 @@ public class DetailPinjamanActivity extends AppCompatActivity {
     private void initViews(){
         tglStart = findViewById(R.id.idTglPinjamDetail);
         tglEnd = findViewById(R.id.idTglKembaliDetail);
-        bookName = findViewById(R.id.idNameBookPinjamDetail);
-        author = findViewById(R.id.idAuthorPinjamDetail);
-        subtotal = findViewById(R.id.idBiayaPinjamDetail);
-        jmlPcs = findViewById(R.id.idPcsBookDetail);
         toolbar = findViewById(R.id.toolbarDetailPinjam);
         totalBayar = findViewById(R.id.idTotalBayar);
-        btnKembali = findViewById(R.id.idKembalikanBuku);
+        btnKembalikan = findViewById(R.id.idKembalikanBuku);
+        tabDetailPinjam = findViewById(R.id.idTabDetailPinjam);
 
         spinner = (ProgressBar) findViewById(R.id.idProgbar);
     }

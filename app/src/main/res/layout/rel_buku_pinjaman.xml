@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="180dp"
+        android:id="@+id/idImgPinjamDetail"
+        android:src="@drawable/koala_kumal"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/idNameBookPinjamDetail"
+        android:text="Book Name"
+        android:layout_toRightOf="@+id/idImgPinjamDetail"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/idAuthorPinjamDetail"
+        android:text="Author"
+        android:layout_toRightOf="@+id/idImgPinjamDetail"
+        android:layout_marginTop="55dp"
+        android:layout_marginLeft="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/idBiayaPinjamDetail"
+        android:textStyle="bold"
+        android:text="Con : Rp 10.000"
+
+        android:layout_toRightOf="@+id/idImgPinjamDetail"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jml Pcs"
+        android:layout_toRightOf="@+id/idBiayaPinjamDetail"
+        android:id="@+id/idPcsBookDetail"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="10dp"/>
+</RelativeLayout>

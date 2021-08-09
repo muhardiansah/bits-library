@@ -1,6 +1,7 @@
 package com.example.bitslibrary;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -9,7 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -112,6 +115,7 @@ public class BookActivity extends AppCompatActivity {
         UserService userService = retrofit.create(UserService.class);
         Call<BookResponse> call = userService.getBook();
         call.enqueue(new Callback<BookResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
                 if (!response.isSuccessful()){
@@ -124,6 +128,19 @@ public class BookActivity extends AppCompatActivity {
 
                 Toast.makeText(BookActivity.this, "detail response berhasil", Toast.LENGTH_SHORT).show();
                 List<Book> bookList = new ArrayList<>(Arrays.asList(bookResponse.getData()));
+
+//                StringBuilder strBuild = new StringBuilder("");
+//
+//                for (Book book : bookList){
+//                    strBuild.append(book.getName()).append(",");
+//                    String comma = strBuild.toString();
+//
+//                    if (comma.length() > 0){
+//                        comma = comma.substring(0, comma.length() -1);
+//                        txtToolbook.setText(comma);
+//                    }
+//                }
+
                 for (Book b: bookList){
                     if (b.getId() == id){
                         DecimalFormat dformt = new DecimalFormat();
@@ -135,13 +152,8 @@ public class BookActivity extends AppCompatActivity {
                         Glide.with(BookActivity.this).load("https://upload.wikimedia.org/wikipedia/id/2/28/Koala_Kumal.jpg")
                                 .into(imageView);
 
-
                     }
-                    String nameBookpref = b.getName();
-                    String authorPref = b.getAuthor();
                 }
-
-//                List<Book> bookData = Arrays.asList(new Book[]{()});
 
                 btnPinjam.setOnClickListener(new View.OnClickListener() {
                     @Override

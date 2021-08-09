@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.bitslibrary.BookActivity;
 import com.example.bitslibrary.Models.Book;
+import com.example.bitslibrary.Models.Utils;
 import com.example.bitslibrary.R;
 
 import java.text.DecimalFormat;
+import java.util.Arrays;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>  {
@@ -50,10 +52,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>  {
         Log.d(TAG, "onBindViewHolder: called");
 
         DecimalFormat dformt = new DecimalFormat();
-        Book book = bookList.get(position);
-        holder.txtName.setText(book.getName());
-        holder.txtAuthor.setText(book.getAuthor());
-        holder.txtPrice.setText("Rp "+dformt.format(book.getPrice()));
+//        Book book = bookList.get(position);
+        holder.txtName.setText(bookList.get(position).getName());
+        holder.txtAuthor.setText(bookList.get(position).getAuthor());
+        holder.txtPrice.setText("Rp "+dformt.format(bookList.get(position).getPrice()));
 
         Glide.with(context).load("https://upload.wikimedia.org/wikipedia/id/2/28/Koala_Kumal.jpg")
                 .into(holder.imageView);
@@ -66,6 +68,22 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>  {
                 context.startActivity(intent);
             }
         });
+
+        String nameBook = bookList.get(position).getName();
+        String author = bookList.get(position).getAuthor();
+        String isbn = bookList.get(position).getIsbn();
+        String isbn13 = bookList.get(position).getIsbn_13();
+        String genre = bookList.get(position).getGenre();
+        String language = bookList.get(position).getLanguage();
+        String date_pub = bookList.get(position).getDate_pub();
+        int pages = bookList.get(position).getPages();
+        String sinopsis = bookList.get(position).getSinopsis();
+        int price = bookList.get(position).getPrice();
+        int fineamt = bookList.get(position).getFineamt();
+
+//        List<Book> bookData = Arrays.asList(new Book[]{new Book(nameBook, author, isbn, isbn13, genre, language, date_pub, pages,
+//                sinopsis, price, fineamt)});
+//        Utils.setBookList(bookData);
 
     }
 

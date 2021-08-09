@@ -9,6 +9,7 @@ public class DaftarPinjamanDataResponse {
     private int total;
     private String created_at;
     private String updated_at;
+    private BorrowDataResponse[] borrowd;
 
     public int getId() {
         return id;
@@ -72,5 +73,13 @@ public class DaftarPinjamanDataResponse {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public BorrowDataResponse[] getBorrowd() {
+        return borrowd;
+    }
+
+    public void setBorrowd(BorrowDataResponse[] borrowd) {
+        this.borrowd = borrowd;
     }
 }

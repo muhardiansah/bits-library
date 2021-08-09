@@ -16,10 +16,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bitslibrary.Api.UserService;
+import com.example.bitslibrary.Cart.CartPinjam;
 import com.example.bitslibrary.Fragment.KonfirmasiFragment;
 import com.example.bitslibrary.Fragment.MainFragment;
 import com.example.bitslibrary.Models.Borrow;
 import com.example.bitslibrary.Models.BorrowData;
+import com.example.bitslibrary.Models.ItemPinjam;
 import com.example.bitslibrary.Models.PinjamRequest;
 import com.example.bitslibrary.Models.PinjamResponse;
 import com.example.bitslibrary.Models.Utils;
@@ -135,17 +137,18 @@ public class KonfirmasiPinjamActivity extends AppCompatActivity {
         );
 
         PinjamRequest pinjamRequest = new PinjamRequest();
-        List<BorrowData> borrowDataList = new ArrayList<BorrowData>();
+        List<ItemPinjam> itemD = new ArrayList<ItemPinjam>();
 
-        BorrowData borrowDataPref = new BorrowData();
-        borrowDataPref.setBook_id(idbook);
-        borrowDataPref.setPrice(price);
-        borrowDataPref.setQty(qty);
-        borrowDataPref.setSubtotal(subtotal);
-        borrowDataList.add(borrowDataPref);
-
+        for (ItemPinjam itemPinjamList : CartPinjam.contents()){
+            itemPinjamList.setBook_id(itemPinjamList.getBook().getId());
+            itemPinjamList.setQty(itemPinjamList.getQty());
+            itemPinjamList.setPrice(itemPinjamList.getBook().getPrice());
+            itemPinjamList.setSubtotal(itemPinjamList.getBook().getPrice()*itemPinjamList.getQty());
+            itemD.add(itemPinjamList);
+        }
         pinjamRequest.setBorrow(borrowPref);
-        pinjamRequest.setBorrowd(borrowDataList);
+        pinjamRequest.setBorrowd(itemD);
+
 
         UserService userService = retrofit.create(UserService.class);
         Call<PinjamResponse> call = userService.pinjam(pinjamRequest);
