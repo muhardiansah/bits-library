@@ -39,8 +39,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -55,7 +57,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DetailPinjamanActivity extends AppCompatActivity {
 
     private TextView tglStart, tglEnd, txtTglPinjam, txtTglKembali, bookName, author, subtotal
-            , jmlPcs, totalBayar;
+            , jmlPcs, totalBayar, txtDenda, txtDendaBayar;
     private ImageView imgView;
     private Toolbar toolbar;
     private Button btnKembalikan;
@@ -162,8 +164,22 @@ public class DetailPinjamanActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
+//                        Date dtNow = Calendar.getInstance().getTime();
+//
+//                        SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+//
+//                        String strNow = df.format(dtNow);
+
                         tglStart.setText(dateViewStart);
                         tglEnd.setText(dateViewEnd);
+
+//                        int telat = new_Date2.compareTo(dtNow);
+//
+//                        if (telat < 0){
+//                            tglEnd.setTextColor(getResources().getColor(R.color.red));
+//                            txtDenda.setTextColor(getResources().getColor(R.color.red));
+//                            txtDendaBayar.setTextColor(getResources().getColor(R.color.red));
+//                        }
 
                         if (status.equals("N")){
                             btnKembalikan.setBackgroundResource(R.drawable.custom_button);
@@ -290,6 +306,8 @@ public class DetailPinjamanActivity extends AppCompatActivity {
         totalBayar = findViewById(R.id.idTotalBayar);
         btnKembalikan = findViewById(R.id.idKembalikanBuku);
         tabDetailPinjam = findViewById(R.id.idTabDetailPinjam);
+//        txtDenda = findViewById(R.id.denda);
+//        txtDendaBayar = findViewById(R.id.dendaBayar);
 
         spinner = (ProgressBar) findViewById(R.id.idProgbar);
     }

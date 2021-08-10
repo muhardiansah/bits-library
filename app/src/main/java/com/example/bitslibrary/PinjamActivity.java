@@ -42,6 +42,8 @@ import com.example.bitslibrary.Models.PinjamResponse;
 import com.example.bitslibrary.Models.Utils;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -50,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Interceptor;
@@ -72,6 +75,7 @@ public class PinjamActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormat;
     public TableLayout tabLayoutCart, tabLayoutDetail;
     private CheckBox cbPinjam;
+    private int days;
 
     private RelativeLayout rlCart, rlDetail;
     private int usrId;
@@ -159,35 +163,8 @@ public class PinjamActivity extends AppCompatActivity {
 //            }
 //        });
 
-        edtTgPinjam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialogPinjam();
-            }
-        });
-        edtTglAkhirPinjam.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialogAkhirPinjam();
-            }
-        });
-
         addCart();
         fillData();
-
-        btnPeminjaman.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (tabLayoutCart.getChildCount() <= 0|| tabLayoutDetail.getChildCount() <= 0 ||
-                        TextUtils.isEmpty(edtTgPinjam.getText().toString()) ||
-                        TextUtils.isEmpty(edtTglAkhirPinjam.getText().toString())){
-                    Toast.makeText(PinjamActivity.this, "Isi dengan lengkap", Toast.LENGTH_LONG).show();
-                }else {
-                    konfirmasiPinjam();
-//                    postPinjam();
-                }
-            }
-        });
 
     }
 
@@ -464,9 +441,23 @@ public class PinjamActivity extends AppCompatActivity {
             tabLayoutDetail.addView(tableRow);
 
         }
-        txtTotalBuku.setText(String.valueOf(CartPinjam.totalBuku())+" Buku");
-        txtDurasi.setText("");
-        totalVal.setText(String.valueOf(CartPinjam.total()));
+
+        edtTgPinjam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialogPinjam();
+            }
+        });
+        edtTglAkhirPinjam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateDialogAkhirPinjam();
+            }
+        });
+
+//        int totalAll = CartPinjam.total()*Utils.getDurasiPinjam();
+        txtTotalBuku.setText(String.valueOf(CartPinjam.totalBuku())+" Buku,");
+//        totalVal.setText(String.valueOf(CartPinjam.total()));
         txtTotal.setText("Rp "+dformt.format(CartPinjam.total()));
 
     }
@@ -485,8 +476,6 @@ public class PinjamActivity extends AppCompatActivity {
         datePickerDialogStart.show();
     }
 
-
-
     private void showDateDialogAkhirPinjam() {
         Calendar calendar = Calendar.getInstance();
         datePickerDialogEnd = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -495,9 +484,57 @@ public class PinjamActivity extends AppCompatActivity {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, month, dayOfMonth);
                 edtTglAkhirPinjam.setText(dateFormat.format(newDate.getTime()));
+                hitungMasaPinjam();
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialogEnd.show();
+    }
+
+    private void hitungMasaPinjam(){
+        String tglMulai = edtTgPinjam.getText().toString();
+        String tglakhir = edtTglAkhirPinjam.getText().toString();
+        SimpleDateFormat formatHitung = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateAwal = formatHitung.parse(tglMulai);
+            Date dateAkhir = formatHitung.parse(tglakhir);
+
+            long mulaiTgl = dateAwal.getTime();
+            long akhirTgl = dateAkhir.getTime();
+
+            if (mulaiTgl <= akhirTgl){
+                Period period = new Period(mulaiTgl, akhirTgl, PeriodType.yearMonthDay());
+                days = period.getDays();
+//                Utils.setDurasiPinjam(days);
+                txtDurasi.setText(String.valueOf(days)+" hari");
+
+                int totalAll = CartPinjam.total() * days;
+                int totalAllVal = CartPinjam.total() * days;
+                totalVal.setText(String.valueOf(totalAllVal));
+                txtTotal.setText("Rp "+dformt.format(totalAll));
+
+                btnPeminjaman.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (tabLayoutCart.getChildCount() <= 0|| tabLayoutDetail.getChildCount() <= 0 ||
+                                TextUtils.isEmpty(edtTgPinjam.getText().toString()) ||
+                                TextUtils.isEmpty(edtTglAkhirPinjam.getText().toString())){
+                            Toast.makeText(PinjamActivity.this, "Isi dengan lengkap", Toast.LENGTH_LONG).show();
+                        }else {
+                            konfirmasiPinjam();
+//                    postPinjam();
+                        }
+                    }
+                });
+
+            }else {
+                Toast.makeText(PinjamActivity.this, "tanggal mulai pinjam harus lebih rendah", Toast.LENGTH_SHORT).show();
+                txtDurasi.setText(" hari");
+                txtTotal.setText("Rp "+dformt.format(CartPinjam.total()));
+                edtTglAkhirPinjam.setText("");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

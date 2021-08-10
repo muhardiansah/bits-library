@@ -154,6 +154,40 @@
                 android:layout_alignParentEnd="true"/>
         </RelativeLayout>
 
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/middleRel3"-->
+<!--            android:layout_below="@+id/middleRel2"-->
+<!--            android:layout_marginTop="15dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/denda"-->
+<!--                android:text="Denda Terlambat"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textSize="16sp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/jmlHari"-->
+<!--                android:text="con: 1 hari"-->
+<!--                android:layout_below="@+id/denda"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:textSize="14sp"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/dendaBayar"-->
+<!--                android:text="Cont: Rp 30.000"-->
+<!--                android:textColor="#17C3B2"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_alignParentEnd="true"/>-->
+<!--        </RelativeLayout>-->
+
     </RelativeLayout>
 
     <Button

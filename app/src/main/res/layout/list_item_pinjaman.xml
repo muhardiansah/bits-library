@@ -42,9 +42,21 @@
             android:textStyle="bold"
             android:text=" 23 Sep 2020"
             android:layout_toRightOf="@+id/idPinjamStartDate"
-
             android:layout_below="@+id/tabListBuku"
             android:layout_marginTop="5dp"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:id="@+id/notifTelat"-->
+<!--            android:text="Terlambat"-->
+<!--            android:textColor="@color/red"-->
+<!--            android:textSize="15sp"-->
+<!--            android:padding="3dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:background="@drawable/custom_btn_telat"-->
+<!--            android:layout_toRightOf="@id/idPinjamEndDate"-->
+<!--            android:layout_below="@+id/tabListBuku"-->
+<!--            />-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="2dp"

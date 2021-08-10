@@ -35,10 +35,13 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.StringJoiner;
 
 import okhttp3.Interceptor;
@@ -103,6 +106,13 @@ public class PinjamanAdapter extends RecyclerView.Adapter<PinjamanAdapter.ViewHo
         }catch (ParseException e){
             e.printStackTrace();
         }
+
+        Date dtNow = Calendar.getInstance().getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+
+        String strNow = df.format(dtNow);
+
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -189,6 +199,18 @@ public class PinjamanAdapter extends RecyclerView.Adapter<PinjamanAdapter.ViewHo
 
         holder.txtStartDate.setText(dateView+" - ");
         holder.txtEndDate.setText(dateViewEnd);
+//
+//        String status = listPinjaman.get(position).getStatus();
+//
+//        int telat = new_Date2.compareTo(dtNow);
+//
+//        if (telat > 0 ){
+//            if (status.equals("N")){
+//                holder.txtTelat.setVisibility(View.VISIBLE);
+//            }else if (status.equals("F")){
+//                holder.txtTelat.setVisibility(View.GONE);
+//            }
+//        }
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,7 +233,7 @@ public class PinjamanAdapter extends RecyclerView.Adapter<PinjamanAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtnameBook, txtStartDate, txtEndDate, txtIdBorrow, textViewBook;
+        private TextView txtStartDate, txtEndDate, textViewBook, txtTelat;
         private CardView parent;
         private TableLayout tabListBuku;
         private TableRow rowListBuku;
@@ -219,11 +241,11 @@ public class PinjamanAdapter extends RecyclerView.Adapter<PinjamanAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            txtnameBook = (TextView) itemView.findViewById(R.id.idNameBookDaftarPinjaman);
             txtStartDate = (TextView) itemView.findViewById(R.id.idPinjamStartDate);
             txtEndDate = (TextView) itemView.findViewById(R.id.idPinjamEndDate);
             parent = (CardView) itemView.findViewById(R.id.parentListPinjam);
             tabListBuku = (TableLayout) itemView.findViewById(R.id.tabListBuku);
+//            txtTelat = (TextView) itemView.findViewById(R.id.notifTelat);
 //            rowListBuku = (TableRow) itemView.findViewById(R.id.tblRowList);
 //            spinner = (ProgressBar) itemView.findViewById(R.id.idProgbar);
         }

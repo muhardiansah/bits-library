@@ -11,6 +11,7 @@ public class Utils {
     public static String namaUser, nohpUser, emailUser, alamatUser, passBaru, ulangiPass;
     public static String passKonfirm, namaBuku, authorBuku;
     public static List<Book> bookList;
+    public static int durasiPinjam;
 
 
     public static int getUsrId() {
@@ -131,5 +132,13 @@ public class Utils {
 
     public static void setAuthorBuku(String authorBuku) {
         Utils.authorBuku = authorBuku;
+    }
+
+    public static int getDurasiPinjam() {
+        return durasiPinjam;
+    }
+
+    public static void setDurasiPinjam(int durasiPinjam) {
+        Utils.durasiPinjam = durasiPinjam;
     }
 }
