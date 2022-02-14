@@ -101,6 +101,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/idProgbar"
+                            android:outlineSpotShadowColor="@color/gray"
+                            android:outlineAmbientShadowColor="@color/gray"
                             style="?android:attr/progressBarStyleLarge"
                             android:layout_centerHorizontal="true"/>
 

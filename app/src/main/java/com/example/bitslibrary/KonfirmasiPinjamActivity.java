@@ -93,16 +93,16 @@ public class KonfirmasiPinjamActivity extends AppCompatActivity {
     private void prosesPinjam(){
 
         Borrow borrow = Utils.getBorrow();
-        List<BorrowData> borrowDList = Utils.getBorrowDataList();
+//        List<BorrowData> borrowDList = Utils.getBorrowDataList();
         tglStart = borrow.getStart_date();
         String tglEnd = borrow.getEnd_date();
         String status = borrow.getStatus();
         int total = (int) borrow.getTotal();
-        BorrowData borrowData = borrowDList.get(0);
-        idbook = borrowData.getBook_id();
-        int price = (int) borrowData.getPrice();
-        int qty = borrowData.getQty();
-        int subtotal = (int) borrowData.getSubtotal();
+//        BorrowData borrowData = borrowDList.get(0);
+//        idbook = borrowData.getBook_id();
+//        int price = (int) borrowData.getPrice();
+//        int qty = borrowData.getQty();
+//        int subtotal = (int) borrowData.getSubtotal();
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

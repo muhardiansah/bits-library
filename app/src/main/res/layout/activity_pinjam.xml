@@ -40,12 +40,13 @@
                 android:id="@+id/penjelasan"
                 android:text="Daftar buku yang akan dipinjam"/>
             <TextView
+                android:layout_marginTop="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Status :N"
                 android:id="@+id/idStatusN"
                 android:layout_toRightOf="@id/penjelasan"
-                android:visibility="gone"
+                android:visibility="visible"
                 />
             <TextView
                 android:layout_width="wrap_content"

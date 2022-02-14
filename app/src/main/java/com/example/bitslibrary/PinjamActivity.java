@@ -10,9 +10,11 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -89,7 +91,7 @@ public class PinjamActivity extends AppCompatActivity {
 
     SharedPreferences preferences, preferencesBorrow, preferencesBorrowData;
     private static final String shared_pref_name = "myPref";
-    private static final int key_usrId = 0;
+    private static final String key_usrId = null;
     private static final String key_api = "api";
 
 //    private static final String shared_pref_name_borrow = "borrowPref";
@@ -131,11 +133,32 @@ public class PinjamActivity extends AppCompatActivity {
             }
         });
 
-        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
-        usrId = preferences.getInt(String.valueOf(key_usrId),0);
+        String packageDate = this.getPackageName();
 
-//        userId.setText(String.valueOf(usrId));
-        statusN.setText("N");
+        long installDate = 0;
+        long updateDate = 0;
+
+        try {
+            installDate = this.getPackageManager().getPackageInfo(packageDate, 0).firstInstallTime;
+            updateDate = this.getPackageManager().getPackageInfo(packageDate, 0).lastUpdateTime;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Date dateFirst = new Date(installDate);
+        Date dateLast = new Date(updateDate);
+//        statusN.setText((String.format("%s", installDate)));
+//        statusN.setText(date.toString().substring(0,12).isEmpty() ? "tgl kosong" : date.toString().substring(0,19));
+
+
+        preferences = getSharedPreferences(shared_pref_name, MODE_PRIVATE);
+        String apis = preferences.getString(key_api,null);
+
+        usrId = preferences.getInt(key_usrId,0);
+
+        statusN.setText(String.valueOf(usrId));
+//        String apis = PreferenceManager.getDefaultSharedPreferences(this).getString(getResources().getString(R.string.api), "");
+//        statusN.setText(apis.isEmpty() ? "kosong" : apis);
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 

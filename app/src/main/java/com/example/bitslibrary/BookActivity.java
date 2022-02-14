@@ -151,7 +151,6 @@ public class BookActivity extends AppCompatActivity {
                         txtPrice.setText("Rp "+dformt.format(b.getPrice()));
                         Glide.with(BookActivity.this).load("https://upload.wikimedia.org/wikipedia/id/2/28/Koala_Kumal.jpg")
                                 .into(imageView);
-
                     }
                 }
 

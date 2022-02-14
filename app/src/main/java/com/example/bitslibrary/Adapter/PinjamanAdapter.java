@@ -171,7 +171,6 @@ public class PinjamanAdapter extends RecyclerView.Adapter<PinjamanAdapter.ViewHo
                                     TableRow.LayoutParams.WRAP_CONTENT
                             ));
 
-
                             for (BorrowDataResponse bData : listDetail){
                                 holder.relativeLayout = (RelativeLayout) inflaterBuku.inflate(R.layout.list_buku_pinjaman, null);
                                 holder.textViewBook = (TextView) holder.relativeLayout.findViewById(R.id.idNameBookDaftarPinjaman);
@@ -186,7 +185,6 @@ public class PinjamanAdapter extends RecyclerView.Adapter<PinjamanAdapter.ViewHo
                             }
                             holder.tabListBuku.addView(tableRowDetailPinjam);
                         }
-
                     }
                 }
             }
